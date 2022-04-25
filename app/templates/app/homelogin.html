@@ -2,49 +2,7 @@
 {% load static %}
 
 {% block contenido%}
-<!--"Jumbotron" dividido en 2 secciones de 6-->
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-12 encabezado fuente">
-            <div class="row">
-                <div class="col-sm-6 d-flex mt-2">
-                    <img src="{% static 'app/img/Logo.png' %}" alt="" class="logomedia">
-                    <h5 class="eslogan" >Dandole la mejor vida a tus mascotas desde 1732 a.c.</h5>
-                </div>
-                <div class="col-sm-6 mt-2 d-flex justify-content-end ">
-                    <a href="{% static 'app/historial.html' %}"><button type="button" class="btn btn-info btnmedia"><i class="fa-solid fa-clock"></i> Historial</button></a>
-                    <a href="#"><button type="button" class="btn btn-info btnmedia" data-bs-toggle="modal" data-bs-target="#myModal"><i class="fa-solid fa-truck-fast"></i> Seguimiento</button></a>
-                    <a href="{% static 'app/carrito.html' %}"><button type="button" class="btn btn-info btnmedia"><i class="fa-solid fa-basket-shopping"></i> Carrito</button></a>
-                    <div class="perfilhome mt-2 mb-2">
-                        <div class=""><img src="{% static 'app/img/productos/gatovandalo.jpg' %}" alt="" class="fotoperfil">
-                            <a href="#"><button type="button" class="btn btn-danger btnmedia" data-bs-toggle="modal" data-bs-target="#ModalLogout">Log Out</button></a>
-                        </div>
-                        <div><h6 class="nombreUsuario">Bienvenido: RobertoCarlos231</h6></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
-<!--Navbar-->
-<nav class="navbar navbar-expand-sm justify-content-center navfondo">
-    <!-- Links -->
-    <ul class="navbar-nav">
-        <li class="nav-item">
-        <a class="nav-link" href="{% static 'app/bandanas.html' %}" style="color: rgb(96, 62, 133); font-size: 25px;"><i class="fa-solid fa-cat"></i> Bandanas</a>
-        </li>
-        <li class="nav-item">
-        <a class="nav-link" href="{% static 'app/correas.html' %}" style="color: rgb(96, 62, 133); font-size: 25px;"><i class="fa-solid fa-paw"></i> Correas/Correas</a>
-        </li>
-        <li class="nav-item">
-        <a class="nav-link" href="{% static 'app/identificaciones.html' %}" style="color: rgb(96, 62, 133); font-size: 25px;"><i class="fa-solid fa-id-card"></i> Identificaciónes</a>
-        </li>
-        <li class="nav-item">
-        <a href="{% static 'app/comidas.html' %}" class="nav-link " style="color: rgb(96, 62, 133); font-size: 25px;"><i class="fa-solid fa-bowl-food"></i> Comidas</a>
-        </li>
-    </ul>
-</nav>
 
 <!--Carrusel de fotos-->
 <div>
@@ -144,101 +102,7 @@
 <!--IMAGEN PARA LLEVAR AL LA SUSCRIPCION-->
 
 <div class="suscripciondonacion">
-    <a href="{% static 'app/suscripcion.html' %}"><img src="{% static 'app/img/Artimember.jpg' %}" alt=""></a>
+    <a href="{% url 'suscripcion' %}"><img src="{% static 'app/img/Artimember.jpg' %}" alt=""></a>
 </div>
-
-<!-- modal seguimiento -->
-<div>
-<div class="modal fade" id="myModal">
-    <div class="modal-dialog">
-    <div class="modal-content">
-
-        <!-- Modal Header -->
-        <div class="modal-header">
-        <h4 class="modal-title">Haz el Seguimiento de tu pedido:</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-        
-        <!-- Modal body -->
-        <div class="modal-body">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm-6"><div>Codigo: <input type="number" name="spnCodigoSeguimiento" id="spnCodigoSeguimiento"></div></div>
-                    <div class="col-sm-6"><p></p><div class="movder"><button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modaldetalles"> Ver Seguimiento</button></div></div>
-                </div>
-            </div>                
-        </div>
-    </div>
-    </div>
-</div>
-</div>
-
-<!-- modal seguimiento detalles -->
-<div>
-    <div class="modal fade" id="modaldetalles">
-        <div class="modal-dialog">
-        <div class="modal-content">
-
-            <!-- Modal Header -->
-            <div class="modal-header">
-            <h4 class="modal-title">Detalles de tu pedido:</h4>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            
-            <!-- Modal body -->
-            <div class="modal-body">
-                <div class="container-fluid">
-                    <div class="row">
-                        <h4>Estado del codigo: 4321</h4>
-                        <div class="container mt-3">        
-                            <table class="table table-bordered">
-                              <thead>
-                                <tr>
-                                  <th>Courrier</th>
-                                  <th>Estado</th>
-                                  <th>Fecha estimada</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <td>Chilexpress</td>
-                                  <td>En camino</td>
-                                  <td>29/04/2022</td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </div>
-                    </div>
-                </div>                
-            </div>
-        </div>
-        </div>
-    </div>
-    </div>
-
-<!-- modal logout -->
-<div>
-    <div class="modal fade" id="ModalLogout">
-        <div class="modal-dialog">
-        <div class="modal-content">
-
-            <!-- Modal Header -->
-            <div class="modal-header">
-            <h4 class="modal-title">Estas seguro de que quieres salir?</h4>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-
-            <!-- Modal body -->
-            <div class="modal-body">
-                <div class="container-fluid">
-                    <div class="row">
-                        <a href="{% static 'app/index.html' %}"><button type="button" class="btn btn-danger"> Salir</button></a>
-                    </div>
-                </div>                
-            </div>
-        </div>
-        </div>
-    </div>
-    </div>
 
 {% endblock%}
