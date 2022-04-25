@@ -1,0 +1,72 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block contenido %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm2"></div>
+        <div class="col-sm8">
+            <div class="login">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h5>Inicia Sesión</h5>
+                        <h6>Usuario</h6>
+                        <input class="txtlogin" type="text" name="usuario" placeholder="Usuario">
+                        <h6>Contraseña</h6>
+                        <input class="txtlogin" type="password" name="pass" placeholder="Contraseña">
+                        <a href="{% url 'homelogin' %}"><input class="btnlogin" type="submit" value="Login"></a> 
+                        <p class="plogin"><a href="#">Olvidé mi contraseña</a></p>
+                    </div>
+                    <div class="col-sm-6">
+                        <h5>¿Aún no estas registrado? ¡Registrate!</h5>
+                        <h6>Usuario</h6>
+                        <input class="txtlogin" type="text" name="usuario" placeholder="Usuario">
+                        <h6>Nombre</h6>
+                        <input class="txtlogin" type="text" name="Nombre" placeholder="Nombre">
+                        <h6>Apellido</h6>
+                        <input class="txtlogin" type="text" name="Apellido" placeholder="Apellido">
+                        <h6>Correo</h6>
+                        <input class="txtlogin" type="text" name="Correo" placeholder="correo@ejemplo.com">
+                        <h6>Dirección</h6>
+                        <input class="txtlogin" type="text" name="direccion" placeholder="Dirección">
+                        <h6>Contraseña</h6>
+                        <input class="txtlogin" type="password" name="pass" placeholder="Contraseña">
+                        <a href="{% url 'homelogin' %}"><input class="btnlogin" type="submit" value="Registrar"></a>
+                        <p class="pregister"></p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <div class="col-sm2"></div>
+    </div>
+</div>
+<br>
+
+
+
+<!-- The Modal -->
+<div>
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+    <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+        <h4 class="modal-title">Haz el Seguimiento de tu pedido:</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-6"><div>Codigo: <input type="number" name="spnCodigoSeguimiento" id="spnCodigoSeguimiento"></div></div>
+                    <div class="col-sm-6"><p></p><div class="movder"><button type="button" class="btn btn-success"> Ver Seguimiento</button></div></div>
+                </div>
+            </div>                
+        </div>
+    </div>
+    </div>
+</div>
+</div>
+{% endblock %}
