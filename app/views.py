@@ -1,10 +1,16 @@
 from django.shortcuts import render
+from .models import *
+from .forms import *
 
 #Indexs / login
 
 def index(request):
     return render(request,'app/index.html')
-
+    productosAll = Productos.objects.all()
+    datos = {
+        'listaProductos' : productosAll
+    }
+    
 def login(request):
     return render(request,'app/login.html')
 
@@ -48,3 +54,8 @@ def historial(request):
 
 def suscripcion(request):
     return render(request,'app/suscripcion.html')
+
+#plushtmls
+
+def agregar_producto(request):
+    return render(request,'app/agregar_producto.html')

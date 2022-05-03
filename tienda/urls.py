@@ -20,3 +20,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('app.urls'))
 ]
+
+admin.site.site_title = 'Tienda'
+admin.site.site_header = 'Administracion de la Tienda'
+admin.site.index_title = 'Módulos de la Tienda'

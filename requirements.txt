@@ -1,0 +1,5 @@
+# pip install -r requirements.txt
+
+django == 4.0.4
+pillow
+django-admin-interface

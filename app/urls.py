@@ -16,4 +16,5 @@ urlpatterns = [
     path('carrito',carrito, name="carrito"),
     path('historial',historial, name="historial"),
     path('suscripcion',suscripcion, name="suscripcion"),
+    path('agregar_producto',agregar_producto, name="agregar_producto"),
 ]
