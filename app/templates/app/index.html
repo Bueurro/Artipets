@@ -49,9 +49,10 @@
 
     <div class="container-fluid">
         <div class="row">
-            {% for aux in listaProductos %}
+            
             <div class="col-sm-12">
                 <div class="row">
+                    {% for aux in listaProductos %}
                     <div class="col-sm-3">
                         <div class="card cartacss">
                             <div class="card-body">
@@ -62,8 +63,8 @@
                             </div>
                         </div>
                     </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
             </div>
         </div>
     </div>

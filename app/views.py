@@ -5,11 +5,11 @@ from .forms import *
 #Indexs / login
 
 def index(request):
-    return render(request,'app/index.html')
-    productosAll = Productos.objects.all()
+    productosAll = Producto.objects.all()
     datos = {
         'listaProductos' : productosAll
     }
+    return render(request,'app/index.html',datos)
     
 def login(request):
     return render(request,'app/login.html')
