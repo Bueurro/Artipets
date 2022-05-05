@@ -11,290 +11,39 @@
     </div>
 </div>
 
- <!--carta de productos-->
+
 <div class="container-fluid">
     <div class="row">
+        
         <div class="col-sm-12 d-flex">
             <div class="row">
-                <div class="col-sm-3">
-
-                    <!--carta 1-->
-                <div class="conte">
-                    <div class="card gato">
-                        <img src="{% static 'app/img/productos/gato2.jpg' %}" alt="">
-                    </div>
-                    <div class="informacion">
-                        <h1>Bandana de gato islamico</h1>
-                        <p class="fecha"> Disponible</p>
-                    </div>
-                    <div class="precio">
-                        <div class="box-precio">
-                            <span class="precio1"><H4>$3.800 <i class="fa-solid fa-crown"></i></H4></span>
-                            <span class="precio2"><b>$4.000</b></span>
-                            <i class="fa-solid fa-cart-plus"></i>
-                            <button type="button" class="btnm">Agregar al carrito</button>
+                {% for aux in listaProductos %}
+                <div class="col-sm-3 d-flex">
+                    <div class="conte">
+                        <div class="card gato">
+                            {% if aux.imagen %}
+                            <img src="{{ aux.imagen.url }}" alt="">
+                            {% else %}
+                            <img src="{% static 'app/img/productos/gato2.jpg' %}" alt="">
+                            {% endif %}
                         </div>
-                    </div>
-                </div>              
-            </div>
-
-
-            <!--carta 2-->
-            <div class="col-sm-3">
-                <div class="conte">
-                    <div class="card gato">
-                        <img src="{% static 'app/img/productos/gatovandalo.jpg' %}" alt="">
-                    </div>
-                    <div class="informacion">
-                        <h1>Bandana de gato  color negro</h1>
-                        <p class="x">Agotado </p>
-                    </div>
-                    <div class="precio">
-                        <div class="box-precio">
-                            <span class="precio1"><H4>$9.500 <i class="fa-solid fa-crown"></i></H4></span>
-                            <span class="precio2"><b>$10.000</b></span>
-                            <i class="fa-solid fa-cart-plus"></i>
-                            <button type="button" class="btnm">Agregar al carrito</button>
+                        <div class="informacion">
+                            <h1>{{aux.nombre}}</h1>
+                            <p class="fecha">stock: {{aux.stock}}</p>
                         </div>
-                    </div>
-                </div>  
-            </div>
-
-
-            <!--carta 3-->
-            <div class="col-sm-3">
-                <div class="conte">
-                    <div class="card gato">
-                        <img src="{% static 'app/img/productos/gato4.jpg' %}" alt="">
-                    </div>
-                    <div class="informacion">
-                        <h1>Bandana de gato color naranjo</h1>
-                        <p class="fecha">Disponible</p>
-                    </div>
-                    <div class="precio">
-                        <div class="box-precio">
-                            <span class="precio1"><H4>$10.450 <i class="fa-solid fa-crown"></i></H4></span>
-                            <span class="precio2"><b>$11.000</b></span>
-                            <i class="fa-solid fa-cart-plus"></i>
-                            <button type="button" class="btnm">Agregar al carrito</button>
+                        <div class="precio">
+                            <div class="box-precio">
+                                <span class="precio1"><H4>${{aux.preciooferta}} <i class="fa-solid fa-crown"></i></H4></span>
+                                <span class="precio2"><b>${{aux.precio}} </b></span>
+                                <i class="fa-solid fa-cart-plus"></i>
+                                <button type="button" class="btnm">Agregar al carrito</button>
+                            </div>
                         </div>
-                    </div>
-                </div>  
-            </div>
-
-
-            <!--carta 4-->
-            <div class="col-sm-3">
-                <div class="conte">
-                    <div class="card gato">
-                        <img src="{% static 'app/img/productos/gato3.jpg' %}" alt="">
-                    </div>
-                    <div class="informacion">
-                        <h1>Bandana de gato  color morado</h1>
-                        <p class="fecha">Disponible</p>
-                    </div>
-                    <div class="precio">
-                        <div class="box-precio">
-                            <span class="precio1"><H4>$9.500 <i class="fa-solid fa-crown"></i></H4></span>
-                            <span class="precio2"><b>$10.000</b></span>
-                            <i class="fa-solid fa-cart-plus"></i>
-                            <button type="button" class="btnm">Agregar al carrito</button>
-                        </div>
-                    </div>
-                </div>  
-            </div>
+                    </div> 
+                </div>
+                {% endfor %}
             </div>
         </div>
-    </div>
-</div>
-
-<!--------------------------fila 2------------------------------------------------------------------------------------->
-<div class="container-fluid">
-    <div class="row">
-       <div class="col-sm-12 d-flex">
-           <div class="row">
-            <div class="col-sm-3">
-                <!--carta 1-->
-            <div class="conte">
-                <div class="card gato">
-                    <img src="{% static 'app/img/productos/gato5.jpg' %}" alt="">
-                </div>
-                <div class="informacion">
-                    <h1>Bandana de gato  color rojo</h1>
-                    <p class="x">Agotado </p>
-                </div>
-                <div class="precio">
-                    <div class="box-precio">
-                        <span class="precio1"><H4>$6.650 <i class="fa-solid fa-crown"></i></H4></span>
-                        <span class="precio2"><b>$7.000</b></span>
-                        <i class="fa-solid fa-cart-plus"></i>
-                        <button type="button" class="btnm">Agregar al carrito</button>
-                    </div>
-                </div>
-            </div>              
-        </div>
-
-
-        <!--carta 2-->
-        <div class="col-sm-3">
-            <div class="conte">
-                <div class="card gato">
-                    <img src="{% static 'app/img/productos/gato6.jpg' %}" alt="">
-                </div>
-                <div class="informacion">
-                    <h1>Bandana diseño de corazon</h1>
-                    <p class="x">Agotado </p>
-                </div>
-                <div class="precio">
-                    <div class="box-precio">
-                        <span class="precio1"><H4>$5.320 <i class="fa-solid fa-crown"></i></H4></span>
-                        <span class="precio2"><b>$5.600</b></span>
-                        <i class="fa-solid fa-cart-plus"></i>
-                        <button type="button" class="btnm">Agregar al carrito</button>
-                    </div>
-                </div>
-            </div>  
-        </div>
-
-
-        <!--carta 3-->
-        <div class="col-sm-3">
-            <div class="conte">
-                <div class="card gato">
-                    <img src="{% static 'app/img/productos/perro1.jpg' %}" alt="">
-                </div>
-                <div class="informacion">
-                    <h1>Bandana diseño animado </h1>
-                    <p class="fecha">Disponible</p>
-                </div>
-                <div class="precio">
-                    <div class="box-precio">
-                        <span class="precio1"><H4>$2.850 <i class="fa-solid fa-crown"></i></H4></span>
-                        <span class="precio2"><b>$3.000</b></span>
-                        <i class="fa-solid fa-cart-plus"></i>
-                        <button type="button" class="btnm">Agregar al carrito</button>
-                    </div>
-                </div>
-            </div>  
-        </div>
-
-
-        <!--carta 4-->
-        <div class="col-sm-3">
-            <div class="conte">
-                <div class="card gato">
-                    <img src="{% static 'app/img/productos/perro2.jpg' %}" alt="">
-                </div>
-                <div class="informacion">
-                    <h1>Bandana para perro color rojo</h1>
-                    <p class="fecha">Disponible</p>
-                </div>
-                <div class="precio">
-                    <div class="box-precio">
-                        <span class="precio1"><H4>$7.125 <i class="fa-solid fa-crown"></i></H4></span> 
-                        <span class="precio2"><b>$7.500</b></span>
-                        <i class="fa-solid fa-cart-plus"></i>
-                        <button type="button" class="btnm">Agregar al carrito</button>
-                    </div>
-                </div>
-            </div>  
-        </div>
-           </div>
-        </div>
-    </div>
-</div>
-
-<!-------------------------------------------------------fila 3---------------------------------------------->
-<div class="container-fluid">
-    <div class="row">
-       <div class="col-sm-12 d-flex">
-           <div class="row">
-            <div class="col-sm-3">
-
-                <!--carta 1-->
-            <div class="conte">
-                <div class="card gato">
-                    <img src="{% static 'app/img/productos/perro3.jpg' %}" alt="">
-                </div>
-                <div class="informacion">
-                    <h1>Bandana diseño de flores</h1>
-                    <p class="fecha cardarreglo">Disponible</p>
-                </div>
-                <div class="precio">
-                    <div class="box-precio">
-                        <span class="precio1"><H4>$9.500 <i class="fa-solid fa-crown"></i></H4></span>
-                        <span class="precio2"><b>$10.000</b></span>
-                        <i class="fa-solid fa-cart-plus"></i>
-                        <button type="button" class="btnm">Agregar al carrito</button>
-                    </div>
-                </div>
-            </div>              
-        </div>
-
-        <!--carta 2-->
-        <div class="col-sm-3">
-            <div class="conte">
-                <div class="card gato">
-                    <img src="{% static 'app/img/productos/perro4.jpg' %}" alt="">
-                </div>
-                <div class="informacion">
-                    <h1>Bandana legendaria matapacos</h1>
-                    <p class="fecha">solo 1</p>
-                </div>
-                <div class="precio">
-                    <div class="box-precio">
-                        <span class="precio1"><H4>$13.775 <i class="fa-solid fa-crown"></i></H4></span>
-                        <span class="precio2"><b>$14.500 </b></span>
-                        <i class="fa-solid fa-cart-plus"></i>
-                        <button type="button" class="btnm">Agregar al carrito</button>
-                    </div>
-                </div>
-            </div>  
-        </div>
-
-        <!--carta 3-->
-        <div class="col-sm-3">
-            <div class="conte">
-                <div class="card gato">
-                    <img src="{% static 'app/img/productos/perro5.jpg' %}" alt="">
-                </div>
-                <div class="informacion">
-                    <h1>Bandana diseño de flores</h1>
-                    <p class="x">Agotado </p>
-                </div>
-                <div class="precio">
-                    <div class="box-precio">
-                        <span class="precio1"><H4>$7.600 <i class="fa-solid fa-crown"></i></H4></span>
-                        <span class="precio2"><b>$8.000</b></span>
-                        <i class="fa-solid fa-cart-plus"></i>
-                        <button type="button" class="btnm">Agregar al carrito</button>
-                    </div>
-                </div>
-            </div>  
-        </div>
-        
-        <!--carta 4-->
-        <div class="col-sm-3">
-            <div class="conte">
-                <div class="card gato">
-                    <img src="{% static 'app/img/productos/perro6.jpg' %}" alt="">
-                </div>
-                <div class="informacion">
-                    <h1>Bandana fachera para el dog</h1>
-                    <p class="fecha">Disponible</p>
-                </div>
-                <div class="precio">
-                    <div class="box-precio">
-                        <span class="precio1"><H4>$10.925 <i class="fa-solid fa-crown"></i></H4></span>
-                        <span class="precio2"><b>$11.500</b></span>
-                        <i class="fa-solid fa-cart-plus"></i>
-                        <button type="button" class="btnm">Agregar al carrito</button>
-                    </div>
-                </div>
-            </div>  
-        </div>
-           </div>
-       </div>
     </div>
 </div>
 {% endblock %}

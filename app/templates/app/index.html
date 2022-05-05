@@ -1,7 +1,7 @@
 {% extends 'app/base.html' %}
 {% load static %}
 
-{% block contenido%}
+{% block contenido %}
     
 
     <!--Carrusel de fotos-->
@@ -56,7 +56,7 @@
                     <div class="col-sm-3">
                         <div class="card cartacss">
                             <div class="card-body">
-                              <h4 class= "card-title">"{{aux.nombre}}"</h4>
+                              <h4 class= "card-title">{{aux.nombre}}</h4>
                                 {% if aux.imagen %} <!--Cambio de aqui hasta...-->
                                 <img src="{{ aux.imagen.url }}" class="imgcartas">
                                 {% else %}
@@ -64,7 +64,7 @@
                                 {% endif %}
                               <!--Aca...-->
                               <p></p>
-                              <a href="#" class="card-link">"{{aux.descripcion}}"</a>
+                              <a href="#" class="card-link">{{aux.descripcion}}</a>
                             </div>
                         </div>
                     </div>

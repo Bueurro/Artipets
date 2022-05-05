@@ -22,10 +22,18 @@ def homelogin(request):
 #Navbar
 
 def bandanas(request):
-    return render(request,'app/bandanas.html')
+    productosAll = Producto.objects.all()
+    datos = {
+        'listaProductos' : productosAll
+    }
+    return render(request,'app/bandanas.html',datos)
 
 def bandanasnl(request):
-    return render(request,'app/bandanasnl.html')
+    productosAll = Producto.objects.all()
+    datos = {
+        'listaProductos' : productosAll
+    }
+    return render(request,'app/bandanasnl.html',datos)
 
 def comidas(request):
     return render(request,'app/comidas.html')

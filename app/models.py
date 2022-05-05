@@ -14,9 +14,10 @@ class Producto(models.Model):
     plu_codigo = models.IntegerField()
     stock = models.IntegerField()
     precio = models.IntegerField()
-    nombre = models.CharField(max_length=20)
-    marca = models.CharField(max_length=20)
-    descripcion = models.CharField(max_length=40)
+    preciooferta = models.IntegerField()
+    nombre = models.CharField(max_length=60)
+    marca = models.CharField(max_length=50)
+    descripcion = models.CharField(max_length=80)
     #hacer la union con la clave foranea 
     tipo = models.ForeignKey(TipoProducto, on_delete=models.CASCADE)
     imagen = models.ImageField(upload_to="productos", null=True)

@@ -26,6 +26,7 @@ class Migration(migrations.Migration):
                 ('plu_codigo', models.IntegerField()),
                 ('stock', models.IntegerField()),
                 ('precio', models.IntegerField()),
+                ('preciooferta', models.IntegerField()),
                 ('nombre', models.CharField(max_length=20)),
                 ('marca', models.CharField(max_length=20)),
                 ('descripcion', models.CharField(max_length=40)),

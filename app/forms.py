@@ -11,7 +11,7 @@ class ProductoForm(ModelForm):
 
     class Meta:
         model = Producto
-        fields = ['plu_codigo','stock','precio','nombre','marca','descripcion','tipo','imagen','fecha_ingreso']
+        fields = ['plu_codigo','stock','precio','preciooferta','nombre','marca','descripcion','tipo','imagen','fecha_ingreso']
     
         widgets = {
                 'fecha_ingreso' : forms.SelectDateWidget(years=range(2020,2023))
