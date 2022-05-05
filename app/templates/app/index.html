@@ -56,10 +56,15 @@
                     <div class="col-sm-3">
                         <div class="card cartacss">
                             <div class="card-body">
-                              <h4 class="card-title">Collar destacado</h4>
-                              <img src="{% static 'app/img/productos/Screenshot_20.png' %}" alt="" class="imgcartas">
+                              <h4 class= "card-title">"{{aux.nombre}}"</h4>
+                                {% if aux.imagen %} <!--Cambio de aqui hasta...-->
+                                <img src="{{ aux.imagen.url }}" class="imgcartas">
+                                {% else %}
+                                <img src="{% static 'app/img/productos/Screenshot_20.png' %}" alt="" class="imgcartas">
+                                {% endif %}
+                              <!--Aca...-->
                               <p></p>
-                              <a href="#" class="card-link">Collar colo-colo para perro largo de hasta 60 centimetros (sirve para humanos tambien)</a>
+                              <a href="#" class="card-link">"{{aux.descripcion}}"</a>
                             </div>
                         </div>
                     </div>

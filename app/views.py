@@ -1,3 +1,4 @@
+from django.http import request
 from django.shortcuts import render
 from .models import *
 from .forms import *
@@ -59,3 +60,16 @@ def suscripcion(request):
 
 def agregar_producto(request):
     return render(request,'app/agregar_producto.html')
+
+
+def agregar_producto(request):
+    #return render(request,'app/agregar_producto.html')
+    datos = {'form' : ProductoForm()}
+
+    if request.method == 'POST' :
+        formulario = ProductoForm(request.POST, files=request.FILES)
+        if formulario.is_valid():
+            formulario.save()
+            datos['mensaje'] = "Producto guardado correctamente!"
+            
+    return render(request,'app/agregar_producto.html',datos)       

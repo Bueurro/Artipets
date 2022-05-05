@@ -25,7 +25,6 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('plu_codigo', models.IntegerField()),
                 ('stock', models.IntegerField()),
-                ('codigo', models.IntegerField()),
                 ('precio', models.IntegerField()),
                 ('nombre', models.CharField(max_length=20)),
                 ('marca', models.CharField(max_length=20)),
