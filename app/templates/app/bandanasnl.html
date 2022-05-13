@@ -18,6 +18,7 @@
         <div class="col-sm-12 d-flex">
             <div class="row">
                 {% for aux in listaProductos %}
+                {% if aux.tipo.tipo == 'bandana' %}
                 <div class="col-sm-3 d-flex">
                     <div class="conte">
                         <div class="card gato">
@@ -41,6 +42,7 @@
                         </div>
                     </div> 
                 </div>
+                {% endif %}
                 {% endfor %}
             </div>
         </div>

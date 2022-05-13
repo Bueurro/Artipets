@@ -17,4 +17,7 @@ urlpatterns = [
     path('historial',historial, name="historial"),
     path('suscripcion',suscripcion, name="suscripcion"),
     path('agregar_producto',agregar_producto, name="agregar_producto"),
+    path('modificar_producto/<plu_codigo>/',modificar_producto, name="modificar_producto"),
+    path('eliminar_producto/<plu_codigo>/',eliminar_producto, name="eliminar_producto"),
+    path('listar_productos',listar_productos, name="listar_productos"),
 ]

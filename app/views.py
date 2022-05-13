@@ -1,5 +1,5 @@
 from django.http import request
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import *
 from .forms import *
 
@@ -36,22 +36,46 @@ def bandanasnl(request):
     return render(request,'app/bandanasnl.html',datos)
 
 def comidas(request):
-    return render(request,'app/comidas.html')
+    productosAll = Producto.objects.all()
+    datos = {
+        'listaProductos' : productosAll
+    }
+    return render(request,'app/comidas.html',datos)
 
 def comidasnl(request):
-    return render(request,'app/comidasnl.html')
+    productosAll = Producto.objects.all()
+    datos = {
+        'listaProductos' : productosAll
+    }
+    return render(request,'app/comidasnl.html',datos)
 
 def correas(request):
-    return render(request,'app/correas.html')
+    productosAll = Producto.objects.all()
+    datos = {
+        'listaProductos' : productosAll
+    }
+    return render(request,'app/correas.html',datos)
 
 def correasnl(request):
-    return render(request,'app/correasnl.html')
+    productosAll = Producto.objects.all()
+    datos = {
+        'listaProductos' : productosAll
+    }
+    return render(request,'app/correasnl.html',datos)
 
 def identificaciones(request):
-    return render(request,'app/identificaciones.html')
+    productosAll = Producto.objects.all()
+    datos = {
+        'listaProductos' : productosAll
+    }
+    return render(request,'app/identificaciones.html',datos)
 
 def identificacionesnl(request):
-    return render(request,'app/identificacionesnl.html')
+    productosAll = Producto.objects.all()
+    datos = {
+        'listaProductos' : productosAll
+    }
+    return render(request,'app/identificacionesnl.html',datos)
 
 #logOptions
 
@@ -80,4 +104,35 @@ def agregar_producto(request):
             formulario.save()
             datos['mensaje'] = "Producto guardado correctamente!"
             
-    return render(request,'app/agregar_producto.html',datos)       
+    return render(request,'app/productos/agregar_producto.html',datos)
+
+def modificar_producto(request,plu_codigo):
+    producto = Producto.objects.get(plu_codigo=plu_codigo)
+    datos = {
+        'form' : ProductoForm(instance=producto)
+    }
+
+    if request.method == 'POST' :
+        formulario = ProductoForm(request.POST, files=request.FILES,instance=producto)
+        if formulario.is_valid():
+            formulario.save()
+            datos['mensaje'] = "Producto modificado correctamente!"
+            datos['form'] = formulario
+            
+    return render(request,'app/productos/modificar_producto.html',datos)
+
+def listar_productos(request):
+    datos = {'form' : ProductoForm()}
+    productosAll = Producto.objects.all()
+    datos = {
+        'listaProductos' : productosAll
+    }
+            
+    return render(request,'app/productos/listar_productos.html',datos)
+
+
+def eliminar_producto(request, plu_codigo):
+    producto = Producto.objects.get(plu_codigo=plu_codigo)
+    producto.delete()
+
+    return redirect(to="listar_productos")
