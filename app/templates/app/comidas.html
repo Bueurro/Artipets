@@ -11,388 +11,47 @@
     </div>
 </div>
 
-<!--carta de productos-->
- <div class="container-fluid">
-     <div class="row">
+<div class="container-fluid">
+    <div class="row">
+        
         <div class="col-sm-12 d-flex">
             <div class="row">
-                <div class="col-sm-3">
-
-                    <!--carta 1-->
-                <div class="conte">
-                    <div class="card gato">
-                        <img src="{% static 'app/img/productos/comida1.jpg' %}" alt="">
-                    </div>
-                    <div class="informacion">
-                        <h1>Paquete de sabrokan (2Kg)</h1>
-                        <p class="fecha"> Disponible</p>
-                    </div>
-                    <div class="precio">
-                        <div class="box-precio">
-                            <span class="precio1"><H4>$5.700 <i class="fa-solid fa-crown"></i></H4></span>
-                            <span class="precio2"><b>$6.000</b></span>
-                            <i class="fa-solid fa-cart-plus"></i>
-                            <button type="button" class="btnm">Agregar al carrito</button>
+                {% for aux in listaProductos %}
+                {% if aux.tipo.tipo == 'comida' %}
+                <div class="col-sm-3 d-flex">
+                    <div class="conte">
+                        <div class="card gato">
+                            {% if aux.imagen %}
+                            <img src="{{ aux.imagen.url }}" alt="">
+                            {% else %}
+                            <img src="{% static 'app/img/productos/gato2.jpg' %}" alt="">
+                            {% endif %}
                         </div>
-                    </div>
-                </div>              
-            </div>
-
-
-            <!--carta 2-->
-            <div class="col-sm-3">
-                <div class="conte">
-                    <div class="card gato">
-                        <img src="{% static 'app/img/productos/comida2.jpg' %}" alt="">
-                    </div>
-                    <div class="informacion">
-                        <h1>Paquete cannnes premium (9Kg)</h1>
-                        <p class="x">Agotado </p>
-                    </div>
-                    <div class="precio">
-                        <div class="box-precio">
-                            <span class="precio1"><H4>$9.500 <i class="fa-solid fa-crown"></i></H4></span>
-                            <span class="precio2"><b>$10.000</b></span>
-                            <i class="fa-solid fa-cart-plus"></i>
-                            <button type="button" class="btnm">Agregar al carrito</button>
+                        <div class="informacion">
+                            <h1>{{aux.nombre}}</h1>
+                            <p class="fecha">stock: {{aux.stock}}</p>
                         </div>
-                    </div>
-                </div>  
-            </div>
-
-
-            <!--carta 3-->
-            <div class="col-sm-3">
-                <div class="conte">
-                    <div class="card gato">
-                        <img src="{% static 'app/img/productos/comida3.jpg' %}" alt="">
-                    </div>
-                    <div class="informacion">
-                        <h1>Pedigree dogchaw </h1>
-                        <p class="fecha">Disponible</p>
-                    </div>
-                    <div class="precio">
-                        <div class="box-precio">
-                            <span class="precio1"><H4>$4.750 <i class="fa-solid fa-crown"></i></H4></span>
-                            <span class="precio2"><b>$5.000</b></span>
-                            <i class="fa-solid fa-cart-plus"></i>
-                            <button type="button" class="btnm">Agregar al carrito</button>
+                        <div class="precio">
+                            <div class="box-precio">
+                                <span class="precio1"><H4>${{aux.preciooferta}} <i class="fa-solid fa-crown"></i></H4></span>
+                                <span class="precio2"><b>${{aux.precio}} </b></span>
+                                <i class="fa-solid fa-cart-plus"></i>
+                                <form action ="" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="nombre_producto" id="nombre_producto" value="{{ aux.nombre }}">
+                                    <input type="hidden" name="precio_producto" id="precio_producto" value="{{ aux.precio }}">
+                                    <input type="hidden" name="preciooferta" id="preciooferta" value="{{ aux.preciooferta }}">
+                                    <input type="hidden" name="descripcion" id="descripcion" value="{{ aux.descripcion }}">
+                                    <input type="hidden" name="imagen_producto" id="imagen_producto" value="{{ aux.imagen }}">
+                                    <input type="submit" value="Comprar" style="cursor: pointer;" class="btnm">
+                                </form>
+                                
+                            </div>
                         </div>
-                    </div>
-                </div>  
-            </div>
-
-
-            <!--carta 4-->
-            <div class="col-sm-3">
-                <div class="conte">
-                    <div class="card gato">
-                        <img src="{% static 'app/img/productos/comida4.png' %}" alt="">
-                    </div>
-                    <div class="informacion">
-                        <h1>Alcon adulto (2kg)</h1>
-                        <p class="fecha">Disponible</p>
-                    </div>
-                    <div class="precio">
-                        <div class="box-precio">
-                            <span class="precio1"><H4>$11.400 <i class="fa-solid fa-crown"></i></H4></span>
-                            <span class="precio2"><b>$12.000</b></span>
-                            <i class="fa-solid fa-cart-plus"></i>
-                            <button type="button" class="btnm">Agregar al carrito</button>
-                        </div>
-                    </div>
-                </div>  
-            </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!--fila 2-->
-<div class="container-fluid">
-    <div class="row">
-       <div class="col-sm-12 d-flex">
-           <div class="row">
-            <div class="col-sm-3">
-                <!--carta 1-->
-            <div class="conte">
-                <div class="card gato">
-                    <img src="{% static 'app/img/productos/comidag1.webp' %}" alt="">
+                    </div> 
                 </div>
-                <div class="informacion">
-                    <h1>Whiskas (2Kg)</h1>
-                    <p class="x">Agotado </p>
-                </div>
-                <div class="precio">
-                    <div class="box-precio">
-                        <span class="precio1"><H4>$7.600 <i class="fa-solid fa-crown"></i></H4></span>
-                        <span class="precio2"><b>$8.000</b></span>
-                        <i class="fa-solid fa-cart-plus"></i>
-                        <button type="button" class="btnm">Agregar al carrito</button>
-                    </div>
-                </div>
-            </div>              
-        </div>
-
-
-        <!--carta 2-->
-        <div class="col-sm-3">
-            <div class="conte">
-                <div class="card gato">
-                    <img src="{% static 'app/img/productos/comidag2.jpeg' %}" alt="">
-                </div>
-                <div class="informacion">
-                    <h1>Felix classic(84g)</h1>
-                    <p class="x">Agotado </p>
-                </div>
-                <div class="precio">
-                    <div class="box-precio">
-                        <span class="precio1"><H4>$1.900 <i class="fa-solid fa-crown"></i></H4></span>
-                        <span class="precio2"><b>$2.000</b></span>
-                        <i class="fa-solid fa-cart-plus"></i>
-                        <button type="button" class="btnm">Agregar al carrito</button>
-                    </div>
-                </div>
-            </div>  
-        </div>
-
-
-        <!--carta 3-->
-        <div class="col-sm-3">
-            <div class="conte">
-                <div class="card gato">
-                    <img src="{% static 'app/img/productos/comidag3.jpg' %}" alt="">
-                </div>
-                <div class="informacion">
-                    <h1>Cat Chow (1Kg) </h1>
-                    <p class="fecha">Disponible</p>
-                </div>
-                <div class="precio">
-                    <div class="box-precio">
-                        <span class="precio1"><H4>$6.175 <i class="fa-solid fa-crown"></i></H4></span>
-                        <span class="precio2"><b>$6.500</b></span>
-                        <i class="fa-solid fa-cart-plus"></i>
-                        <button type="button" class="btnm">Agregar al carrito</button>
-                    </div>
-                </div>
-            </div>  
-        </div>
-
-
-        <!--carta 4-->
-        <div class="col-sm-3">
-            <div class="conte">
-                <div class="card gato">
-                    <img src="{% static 'app/img/productos/comidag4.png' %}" alt="">
-                </div>
-                <div class="informacion">
-                    <h1>Felines premium (20Kg)</h1>
-                    <p class="fecha">Disponible</p>
-                </div>
-                <div class="precio">
-                    <div class="box-precio">
-                        <span class="precio1"><H4>$19.380 <i class="fa-solid fa-crown"></i></H4></span> 
-                        <span class="precio2"><b>$20.400</b></span>
-                        <i class="fa-solid fa-cart-plus"></i>
-                        <button type="button" class="btnm">Agregar al carrito</button>
-                    </div>
-                </div>
-            </div>  
-        </div>
-           </div>
-       </div>
-    </div>
-</div>
-
-<!--fila 3-->
-<div class="container-fluid">
-    <div class="row">
-       <div class="col-sm-12 d-flex">
-           <div class="row">
-            <div class="col-sm-3">
-
-                <!--carta 1-->
-            <div class="conte">
-                <div class="card gato">
-                    <img src="{% static 'app/img/productos/comidap1.png' %}" alt="">
-                </div>
-                <div class="informacion">
-                    <h1>Tetra Finn(28g)</h1>
-                    <p class="fecha cardarreglo">Disponible</p>
-                </div>
-                <div class="precio">
-                    <div class="box-precio">
-                        <span class="precio1"><H4>$3.040 <i class="fa-solid fa-crown"></i></H4></span>
-                        <span class="precio2"><b>$3.200</b></span>
-                        <i class="fa-solid fa-cart-plus"></i>
-                        <button type="button" class="btnm">Agregar al carrito</button>
-                    </div>
-                </div>
-            </div>              
-        </div>
-
-
-        <!--carta 2-->
-        <div class="col-sm-3">
-            <div class="conte">
-                <div class="card gato">
-                    <img src="{% static 'app/img/productos/comidap2.jpg' %}" alt="">
-                </div>
-                <div class="informacion">
-                    <h1>Tetra Betta(20g)</h1>
-                    <p class="fecha">solo 1</p>
-                </div>
-                <div class="precio">
-                    <div class="box-precio">
-                        <span class="precio1"><H4>$1.995 <i class="fa-solid fa-crown"></i></H4></span>
-                        <span class="precio2"><b>$2.100</b></span>
-                        <i class="fa-solid fa-cart-plus"></i>
-                        <button type="button" class="btnm">Agregar al carrito</button>
-                    </div>
-                </div>
-            </div>  
-        </div>
-
-
-        <!--carta 3-->
-        <div class="col-sm-3">
-            <div class="conte">
-                <div class="card gato">
-                    <img src="{% static 'app/img/productos/comidap3.png' %}" alt="">
-                </div>
-                <div class="informacion">
-                    <h1>Danjana betta (15)</h1>
-                    <p class="x">Agotado </p>
-                </div>
-                <div class="precio">
-                    <div class="box-precio">
-                        <span class="precio1"><H4>$1.520<i class="fa-solid fa-crown"></i></H4></span>
-                        <span class="precio2"><b>$1.600</b></span>
-                        <i class="fa-solid fa-cart-plus"></i>
-                        <button type="button" class="btnm">Agregar al carrito</button>
-                    </div>
-                </div>
-            </div>  
-        </div>
-
-
-        <!--carta 4-->
-        <div class="col-sm-3">
-            <div class="conte">
-                <div class="card gato">
-                    <img src="{% static 'app/img/productos/comidap4.jpg' %}" alt="">
-                </div>
-                <div class="informacion">
-                    <h1>Tetra Pond Sticks</h1>
-                    <p class="fecha">Disponible</p>
-                </div>
-                <div class="precio">
-                    <div class="box-precio">
-                        <span class="precio1"><H4>$9.310 <i class="fa-solid fa-crown"></i></H4></span>
-                        <span class="precio2"><b>$9.800</b></span>
-                        <i class="fa-solid fa-cart-plus"></i>
-                        <button type="button" class="btnm">Agregar al carrito</button>
-                    </div>
-                </div>
-            </div>  
-        </div>
-           </div>
-       </div>
-    </div>
-</div>
-
-<!--fila 4-->
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-12 d-flex">
-            <div class="row">
-                <div class="col-sm-3">
-
-                    <!--carta 1-->
-                <div class="conte ">
-                    <div class="card gato">
-                        <img src="{% static 'app/img/productos/comidat1.jpg' %}" alt="">
-                    </div>
-                    <div class="informacion">
-                        <h1>Lomas Reptile sticks(300g)</h1>
-                        <p class="fecha cardarreglo">Disponible</p>
-                    </div>
-                    <div class="precio">
-                        <div class="box-precio">
-                            <span class="precio1"><H4>$9.595 <i class="fa-solid fa-crown"></i></H4></span>
-                            <span class="precio2"><b>$10.100</b></span>
-                            <i class="fa-solid fa-cart-plus"></i>
-                            <button type="button" class="btnm">Agregar al carrito</button>
-                        </div>
-                    </div>
-                </div>              
-            </div>
-
-
-            <!--carta 2-->
-            <div class="col-sm-3">
-                <div class="conte">
-                    <div class="card gato">
-                        <img src="{% static 'app/img/productos/comidat2.jpg' %}" alt="">
-                    </div>
-                    <div class="informacion">
-                        <h1>Lomas tortugas bites (30kg)</h1>
-                        <p class="fecha">solo 1</p>
-                    </div>
-                    <div class="precio">
-                        <div class="box-precio">
-                            <span class="precio1"><H4>$9.025<i class="fa-solid fa-crown"></i></H4></span>
-                            <span class="precio2"><b>$9.500</b></span>
-                            <i class="fa-solid fa-cart-plus"></i>
-                            <button type="button" class="btnm">Agregar al carrito</button>
-                        </div>
-                    </div>
-                </div>  
-            </div>
-
-
-            <!--carta 3-->
-            <div class="col-sm-3">
-                <div class="conte">
-                    <div class="card gato">
-                        <img src="{% static 'app/img/productos/comidat3.webp' %}" alt="">
-                    </div>
-                    <div class="informacion">
-                        <h1>Mazuri (35)</h1>
-                        <p class="x">Agotado </p>
-                    </div>
-                    <div class="precio">
-                        <div class="box-precio">
-                            <span class="precio1"><H4>$6.175<i class="fa-solid fa-crown"></i></H4></span>
-                            <span class="precio2"><b>$6.500</b></span>
-                            <i class="fa-solid fa-cart-plus"></i>
-                            <button type="button" class="btnm">Agregar al carrito</button>
-                        </div>
-                    </div>
-                </div>  
-            </div>
-
-
-            <!--carta 4-->
-            <div class="col-sm-3">
-                <div class="conte">
-                    <div class="card gato">
-                        <img src="{% static 'app/img/productos/comidat4.jpg' %}" alt="">
-                    </div>
-                    <div class="informacion">
-                        <h1>Tetra Gammarus</h1>
-                        <p class="fecha">Disponible</p>
-                    </div>
-                    <div class="precio">
-                        <div class="box-precio">
-                            <span class="precio1"><H4>$10.925 <i class="fa-solid fa-crown"></i></H4></span>
-                            <span class="precio2"><b>$11.500</b></span>
-                            <i class="fa-solid fa-cart-plus"></i>
-                            <button type="button" class="btnm">Agregar al carrito</button>
-                        </div>
-                    </div>
-                </div>  
-            </div>
+                {% endif %}
+                {% endfor %}
             </div>
         </div>
     </div>

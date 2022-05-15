@@ -27,12 +27,43 @@ class Producto(models.Model):
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
 
-    def __str__(self):
-        return self.nombre
+    def __int__(self):
+        return self.plu_codigo
     
 
     class Meta:
         db_table = 'db_producto'
+
+class Carrito_Producto(models.Model):
+    nombre_producto = models.CharField(max_length=60)
+    precio_producto = models.IntegerField()
+    preciooferta = models.IntegerField(null=True)
+    descripcion = models.CharField(max_length=100, null=False)
+    imagen = models.ImageField(upload_to="carrito_producto", null=True)
+
+    def __str__(self):
+        return self.nombre_producto
+    
+    class Meta:
+        db_table = 'db_carrito_producto'
+    
+
+
+
+class Carrito(models.Model):
+     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+
+     class Meta:
+        db_table = 'db_carrito'
+ 
+
+
+
+
+
+
+
+
 #pyton manage.py makemigrations -crea el script de la bd
 #python manage.py migration -crea las tablas de la bd
 

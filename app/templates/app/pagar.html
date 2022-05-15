@@ -1,0 +1,33 @@
+{% extends 'app/relleno.html' %}
+{% load static %}
+
+{% block contenido %}
+<!--TITULO DE LA SECCION EN QUE SE ENCUETRA-->    
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 pdcsso">
+            <h2></h2>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid">
+    <div class="row">
+        
+        <div class="col-sm-12 d-flex">
+            <div class="row">
+                <div class="contenedor d-flex " margin-left:400px>
+                    <div class="tabla">
+                        <p class="titulosub">PAGO EXITOSO</p>
+                        <img src="{% static 'app/img/crown.png' %}" class="imgsub" alt="">
+                        <p class="subtitulosub">COMPRA REALIZADA</p>
+                        <p class="descripcionsub">TU COMPRA SE A REALIZADO CON EXITO</p>
+                        <a href="{% url 'carrito' %}" class="boton">VOLVER AL CARRITO</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

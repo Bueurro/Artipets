@@ -23,10 +23,17 @@ def homelogin(request):
 
 def bandanas(request):
     productosAll = Producto.objects.all()
-    datos = {
-        'listaProductos' : productosAll
-    }
-    return render(request,'app/bandanas.html',datos)
+    datos = { 'listaProductos' : productosAll }
+    
+    if request.method == 'POST':
+        carrito = Carrito_Producto()
+        carrito.nombre_producto = request.POST.get('nombre_producto')      
+        carrito.precio_producto = request.POST.get('precio_producto')
+        carrito.preciooferta = request.POST.get('preciooferta')
+        carrito.imagen = request.POST.get('imagen_producto')  
+        carrito.save()
+        
+    return render(request, 'app/bandanas.html', datos)
 
 def bandanasnl(request):
     productosAll = Producto.objects.all()
@@ -40,6 +47,15 @@ def comidas(request):
     datos = {
         'listaProductos' : productosAll
     }
+
+    if request.method == 'POST':
+        carrito = Carrito_Producto()
+        carrito.nombre_producto = request.POST.get('nombre_producto')      
+        carrito.precio_producto = request.POST.get('precio_producto')
+        carrito.preciooferta = request.POST.get('preciooferta')
+        carrito.imagen = request.POST.get('imagen_producto')  
+        carrito.save()
+
     return render(request,'app/comidas.html',datos)
 
 def comidasnl(request):
@@ -54,6 +70,15 @@ def correas(request):
     datos = {
         'listaProductos' : productosAll
     }
+
+    if request.method == 'POST':
+        carrito = Carrito_Producto()
+        carrito.nombre_producto = request.POST.get('nombre_producto')      
+        carrito.precio_producto = request.POST.get('precio_producto')
+        carrito.preciooferta = request.POST.get('preciooferta')
+        carrito.imagen = request.POST.get('imagen_producto')  
+        carrito.save()
+
     return render(request,'app/correas.html',datos)
 
 def correasnl(request):
@@ -68,6 +93,16 @@ def identificaciones(request):
     datos = {
         'listaProductos' : productosAll
     }
+
+    if request.method == 'POST':
+        carrito = Carrito_Producto()
+        carrito.nombre_producto = request.POST.get('nombre_producto')      
+        carrito.precio_producto = request.POST.get('precio_producto')
+        carrito.preciooferta = request.POST.get('preciooferta')
+        carrito.descripcion = request.POST.get('descripcion')
+        carrito.imagen = request.POST.get('imagen_producto')  
+        carrito.save()
+
     return render(request,'app/identificaciones.html',datos)
 
 def identificacionesnl(request):
@@ -80,7 +115,18 @@ def identificacionesnl(request):
 #logOptions
 
 def carrito(request):
-    return render(request,'app/carrito.html')
+    carrito = Carrito_Producto.objects.all()
+    datos = { 'listacarrrito' : carrito }
+    return render(request,'app/carrito.html',datos)
+
+
+
+def pagar(request):
+    carrito = Carrito_Producto.objects.all()
+    carrito.delete()
+    
+    return render(request, 'app/pagar.html')
+
 
 def historial(request):
     return render(request,'app/historial.html')
@@ -136,3 +182,4 @@ def eliminar_producto(request, plu_codigo):
     producto.delete()
 
     return redirect(to="listar_productos")
+

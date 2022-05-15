@@ -49,51 +49,29 @@
 
 <div class="container-fluid">
     <div class="row">
+        
         <div class="col-sm-12">
             <div class="row">
+                {% for aux in listaProductos %}
+                {% if aux.tipo.tipo == 'destacado' %}
                 <div class="col-sm-3">
                     <div class="card cartacss">
                         <div class="card-body">
-                          <h4 class="card-title">Collar destacado</h4>
-                          <img src="{% static 'app/img/productos/Screenshot_20.png' %}" alt="" class="imgcartas">
+                          <h4 class= "card-title">{{aux.nombre}}</h4>
+                            {% if aux.imagen %} <!--Cambio de aqui hasta...-->
+                            <img src="{{ aux.imagen.url }}" class="imgcartas">
+                            {% else %}
+                            <img src="{% static 'app/img/productos/Screenshot_20.png' %}" alt="" class="imgcartas">
+                            {% endif %}
+                          <!--Aca...-->
                           <p></p>
-                          <a href="#" class="card-link">Collar colo-colo para perro largo de hasta 60 centimetros (sirve para humanos tambien)</a>
+                          <a href="#" class="card-link">{{aux.descripcion}}</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3">
-                    <div class="card cartacss">
-                        <div class="card-body">
-                          <h4 class="card-title">Bandana destacada</h4>
-                          <img src="{% static 'app/img/productos/gatovandalo.jpg' %}" alt="" class="imgcartas">
-                          <p></p>
-                          <a href="#" class="card-link">Bandana para Gato Mafioso Modelo legendario</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="card cartacss">
-                        <div class="card-body">
-                          <h4 class="card-title">Identificación destacada</h4>
-                          <Br></Br>
-                          <img src="{% static 'app/img/productos/D_NQ_NP_611376-MLC48332891372_112021-V.jpg' %}" alt="" class="imgcartas">
-                          <p></p>
-                          <Br></Br>
-                          <a href="#" class="card-link">Identificacion del gato mas buscado en toda america</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="card cartacss">
-                        <div class="card-body">
-                          <h4 class="card-title">Comida destacada</h4>
-                          <img src="{% static 'app/img/productos/Pedigree-Adulto.png' %}" alt="" class="imgcartas">
-                          <p></p>
-                          <a href="#" class="card-link">Comida que come el mismisimo Perro Waton</a>
-                        </div>
-                    </div>
-                </div>
-            </div>                
+                {% endif %}
+                {% endfor %}
+            </div>
         </div>
     </div>
 </div>

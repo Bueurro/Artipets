@@ -2,63 +2,46 @@
 {% load static %}
 
 {% block contenido %}
-<div class="container-fluid ">
-    <div class="row">
-        <div class="col-sm-12 d-flex ">
-            <div class="col-sm-3"><div class="container mt-3">
-                <table class="table table-bordered">
-                  <thead>
-                    <tr>
-                        <th class="tgrand">imagen</th>
-                        <th class="tgrand">Nombre</th>
-                        <th class="tgrand">Codigo</th>
-                        <th class="tgrand">Cantidad</th>
-                        <th class="tgrand">Precio unidad</th>
-                        <th class="tgrand">Total</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                      
-                    <tr>
-                        <td><img src="{% static 'app/img/productos/carnet2.png' %}" class="tdimg"></td> 
-                        <td class="tgrand">Modelo de Identificacion 2</td>
-                        <td class="tgrand">565876</td>
-                        <td class="tgrand">5</td>
-                        <td class="tgrand">$4.000</td>
-                        <td class="tgrand">$20.000</td>
-                    </tr>
-                    <tr>
-                        <td class="tgrand"><img src="{% static 'app/img/productos/collarn5.jpg' %}" class="tdimg"></td>
-                        <td class="tgrand">Collar Navideño</td>
-                        <td class="tgrand">768945</td>
-                        <td class="tgrand">3</td>
-                        <td class="tgrand">$9.500</td>
-                        <td class="tgrand">$28.500</td>
-                      </tr>
-                      <tr>
-                        <td class="tgrand"><img src="{% static 'app/img/productos/comidag4.png' %}" class="tdimg"></td>
-                        <td class="tgrand">Felines premium (20Kg)</td>
-                        <td class="tgrand">908767</td>
-                        <td class="tgrand">2</td>
-                        <td class="tgrand">$20.400</td>
-                        <td class="tgrand">$40.800</td>
-                      </tr>
-                      <tr>
-                        <td><img src="{% static 'app/img/productos/gatovandalo.jpg' %}" class="tdimg"></td>
-                        <td class="tgrand">Bandana de gato color negro</td>
-                        <td class="tgrand">666777</td>
-                        <td class="tgrand">3</td>
-                        <td class="tgrand">$9.500</td>
-                        <td class="tgrand">$28.500</td>
-                      </tr>
-                  </tbody>
-                  
-                </table>
-            </div>
-        </div>
+<div class="container-fluid mt-3">
+  <div class="row">
+    <div class="col-sm-8">
+      <table class="table table-bordered table-striped">
+        <thead>  
+            <tr>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Precio Artimember</th>
+                <th>descripción</th>
+            </tr>
+        </thead>
+        <tbody>
+          {% for aux in listacarrrito %}
+          <tr>
+            <td>
+              <a href=""> <img src="{{ aux.imagen.url }} " style="max-width: 100px;" alt="" class="img-fluid"></a>
+            </td>
+            <td>
+              <h5 class="mb-1">{{ aux.nombre_producto }}</h5>
+            </td>
+            <td>
+              <p>${{ aux.precio_producto }}</p>
+            </td>
+            <td>
+              <p>${{ aux.preciooferta }}</p>
+            </td>
+            <td>
+                <p class="total-price front-weight-bold m-0">{{ aux.descripcion }}</p>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
+    <div class="col-sm-4"></div>
+  </div>
 </div>
-</div>
+
 
 <div class="container-fluid">
     <div class="row">
@@ -74,7 +57,7 @@
                   </tr>
                 </tbody>
               </table>
-              <button type="button" class="btnm carroboton">Pagar</button></div></div>
+              <a type="submit" name="pagar" id="pagar" href="{% url 'pagar' %}" class="btnm carroboton">pagar</a>
         </div>
     </div>
 {% endblock %}
