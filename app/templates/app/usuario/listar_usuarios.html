@@ -1,0 +1,52 @@
+{% extends 'app/baseformlogin.html' %}
+{% load static %}
+{% block contenido%}
+
+<section class="py-4">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <table class="table table-dark table-striped">
+                    <thead>  
+                        <tr>
+                            <th>CODIGO USUARIO</th>
+                            <th>USUARIO</th>
+                            <th>NOMBRE</th>
+                            <th>APELLIDO</th>
+                            <th>CORREO</th>
+                            <th>DIRECCIÓN</th>
+                            <th>CONTRASEÑA</th>
+                            <th>OPCIONES</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for aux in listaUsuarios %}
+                        <tr>
+                            <td>{{ aux.id_usuario }}</td>
+                            <td>{{ aux.usuario }}</td>
+                            <td>{{ aux.nombre }}</td>
+                            <td>{{ aux.apellido }}</td>
+                            <td>{{ aux.correo }}</td>
+                            <td>{{ aux.direccion }}</td>
+                            <td>{{ aux.contrasena }}</td>
+                            <td>
+                                <a href="{% url 'modificar_usuario' aux.id_usuario %}" class="btn btn-info">Modificar</a>
+                                <a onclick="popupusuario({{ aux.id_usuario }})" class="btn btn-danger">Eliminar</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div style="height: 564px;">
+                    <a href="agregar_usuario" class="btn btn-info">Agregar Usuario</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+{% endblock%}

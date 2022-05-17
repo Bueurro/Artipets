@@ -10,7 +10,15 @@
     <link rel="stylesheet" href="{% static 'app/css/style.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link rel="icon" href="{% static 'app/img/Logo.png' %}">
-    <title>ArtiPets - Conviertete en un Artiko para tus mascotas</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.8/sweetalert2.min.js"
+        integrity="sha512-7x7HoEikRZhV0FAORWP+hrUzl75JW/uLHBbg2kHnPdFmScpIeHY0ieUVSacjusrKrlA/RsA2tDOBvisFmKc3xw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.8/sweetalert2.css"
+        integrity="sha512-40/Lc5CTd+76RzYwpttkBAJU68jKKQy4mnPI52KKOHwRBsGcvQct9cIqpWT/XGLSsQFAcuty1fIuNgqRoZTiGQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="{% static 'app/js/mensajes.js' %}"></script>
+
+    <title>ArtiPets - Conviértete en un Artiko para tus mascotas</title>
 </head>
 <body>
     <!--"Jumbotron" dividido en 2 secciones de 6-->
@@ -20,7 +28,7 @@
             <div class="row">
                 <div class="col-sm-6 d-flex mt-2">
                     <a href="{% url 'homelogin' %}"><img src="{% static 'app/img/Logo.png' %}" alt="" class="logomedia"></a>
-                    <h5 class="eslogan" >Dandole la mejor vida a tus mascotas desde 1732 a.c.</h5>
+                    <h5 class="eslogan" >Dándole la mejor vida a tus mascotas desde 1732 a.c.</h5>
                 </div>
                 <div class="col-sm-6 mt-2 d-flex justify-content-end ">
                     <a href="{% url 'historial' %}"><button type="button" class="btn btn-info btnmedia"><i class="fa-solid fa-clock"></i> Historial</button></a>
@@ -46,7 +54,7 @@
         <a class="nav-link" href="{% url 'bandanas' %}" style="color: rgb(96, 62, 133); font-size: 25px;"><i class="fa-solid fa-cat"></i> Bandanas</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link" href="{% url 'correas' %}" style="color: rgb(96, 62, 133); font-size: 25px;"><i class="fa-solid fa-paw"></i> Correas/Correas</a>
+        <a class="nav-link" href="{% url 'correas' %}" style="color: rgb(96, 62, 133); font-size: 25px;"><i class="fa-solid fa-paw"></i>Correas/Collares</a>
         </li>
         <li class="nav-item">
         <a class="nav-link" href="{% url 'identificaciones' %}" style="color: rgb(96, 62, 133); font-size: 25px;"><i class="fa-solid fa-id-card"></i> Identificaciónes</a>

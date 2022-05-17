@@ -37,17 +37,18 @@
                                 <span class="precio1"><H4>${{aux.preciooferta}} <i class="fa-solid fa-crown"></i></H4></span>
                                 <span class="precio2"><b>${{aux.precio}} </b></span>
                                 <i class="fa-solid fa-cart-plus"></i>
-                                <form action ="" method="POST">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="nombre_producto" id="nombre_producto" value="{{ aux.nombre }}">
-                                    <input type="hidden" name="precio_producto" id="precio_producto" value="{{ aux.precio }}">
-                                    <input type="hidden" name="preciooferta" id="preciooferta" value="{{ aux.preciooferta }}">
-                                    <input type="hidden" name="descripcion" id="descripcion" value="{{ aux.descripcion }}">
-                                    <input type="hidden" name="imagen_producto" id="imagen_producto" value="{{ aux.imagen }}">
-                                    <input type="submit" value="Comprar" style="cursor: pointer;" class="btnm">
-                                </form>
-                                
-                            </div>
+                                <div>
+                                    <form action ="" method="POST">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="nombre_producto" id="nombre_producto" value="{{ aux.nombre }}">
+                                        <input type="hidden" name="precio_producto" id="precio_producto" value="{{ aux.precio }}">
+                                        <input type="hidden" name="preciooferta" id="preciooferta" value="{{ aux.preciooferta }}">
+                                        <input type="hidden" name="descripcion" id="descripcion" value="{{ aux.descripcion }}">
+                                        <input type="hidden" name="imagen_producto" id="imagen_producto" value="{{ aux.imagen }}">
+                                        <input type="submit" value="Comprar"  style="cursor: pointer;" class="btnm">
+                                    </form>
+                                </div>   
+                            </div> 
                         </div>
                     </div> 
                 </div>

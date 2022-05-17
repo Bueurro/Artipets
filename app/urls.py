@@ -20,5 +20,9 @@ urlpatterns = [
     path('modificar_producto/<plu_codigo>/',modificar_producto, name="modificar_producto"),
     path('eliminar_producto/<plu_codigo>/',eliminar_producto, name="eliminar_producto"),
     path('listar_productos',listar_productos, name="listar_productos"),
+    path('agregar_usuario',agregar_usuario, name="agregar_usuario"),
+    path('modificar_usuario/<id_usuario>/',modificar_usuario, name="modificar_usuario"),
+    path('eliminar_usuario/<id_usuario>/',eliminar_usuario, name="eliminar_usuario"),
+    path('listar_usuarios',listar_usuarios, name="listar_usuarios"),
     path('pagar',pagar, name="pagar"),
 ]

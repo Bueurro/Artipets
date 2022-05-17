@@ -39,12 +39,15 @@
                             <td>{{ aux.created_at }}</td>
                             <td>
                                 <a href="{% url 'modificar_producto' aux.plu_codigo %}" class="btn btn-info">Modificar</a>
-                                <a href="{% url 'eliminar_producto' aux.plu_codigo %}" class="btn btn-danger">Eliminar</a>
+                                <a onclick="confirmarborrado({{ aux.plu_codigo }})" class="btn btn-danger">Eliminar</a>
                             </td>
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
+                <div style="height: 564px;">
+                    <a href="agregar_producto" class="btn btn-info">Agregar Producto</a>
+                </div>
             </div>
         </div>
     </div>

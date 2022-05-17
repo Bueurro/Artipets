@@ -46,19 +46,23 @@ class Carrito_Producto(models.Model):
     
     class Meta:
         db_table = 'db_carrito_producto'
+
+
+class Usuario(models.Model):
+    id_usuario = models.IntegerField(null=False,primary_key=True)
+    usuario = models.CharField(max_length=20)
+    nombre = models.CharField(max_length=25)
+    apellido = models.CharField(max_length=25)
+    correo = models.CharField(max_length=30)
+    direccion = models.CharField(max_length=50)
+    contrasena = models.CharField(max_length=20)
+    confirmar_contrasena = models.CharField(max_length=20)
+
+    def __int__(self):
+        return self.id_usuario
     
-
-
-
-class Carrito(models.Model):
-     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
-
-     class Meta:
-        db_table = 'db_carrito'
- 
-
-
-
+    class Meta:
+        db_table = 'db_usuario'
 
 
 
