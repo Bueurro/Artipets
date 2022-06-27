@@ -35,14 +35,10 @@ class Producto(models.Model):
         db_table = 'db_producto'
 
 class Carrito_Producto(models.Model):
-    nombre_producto = models.CharField(max_length=60)
-    precio_producto = models.IntegerField()
-    preciooferta = models.IntegerField(null=True)
-    descripcion = models.CharField(max_length=100, null=False)
-    imagen = models.ImageField(upload_to="carrito_producto", null=True)
+    plu_codigo = models.ForeignKey(Producto, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.nombre_producto
+        return self.plu_codigo
     
     class Meta:
         db_table = 'db_carrito_producto'
@@ -63,6 +59,23 @@ class Usuario(models.Model):
     
     class Meta:
         db_table = 'db_usuario'
+
+
+class Suscriptor(models.Model):
+    nombre_usuario = models.CharField(max_length=20,null=False, primary_key=True)
+    suscrito = models.BooleanField(null=True)
+
+    def __str__(self):
+        return self.username
+
+    class Meta:
+        db_table = 'db_suscriptor'
+
+class Historial(models.Model):
+    plu_codigo = models.ForeignKey(Carrito_Producto, on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = "db_Historial"        
 
 
 

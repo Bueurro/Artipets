@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from ensurepip import bootstrap
 from pathlib import Path
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -42,6 +43,9 @@ INSTALLED_APPS = [
     'app.apps.AppConfig',
     'colorfield',
     'crispy_forms',
+    'rest_framework',
+    'apiapp',
+    
 ]
 
 X_FRAME_OPTIONS = "SAMEORIGIN"
@@ -82,8 +86,15 @@ WSGI_APPLICATION = 'tienda.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'bd_api_app',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'USER': 'root',
+        'PASSWORD': '',
+        'OPTIONS': {
+            'init_command' : "SET sql_mode='STRICT_TRANS_TABLES'"
+        }
     }
 }
 
@@ -136,3 +147,9 @@ MEDIA_URL = '/media/' #( cuando las imagenes ya estan gaurdadas )
 MEDIA_ROOT = os.path.join (BASE_DIR, 'media') #( cuando vamos a guardar )
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage" #nos permite guardar mensajes
+
+
+LOGIN_REDIRECT_URL = '/home/' #PARA CUANDO INICIA SESION
+LOGOUT_REDIRECT_URL = '/' #PARA CUANDO CIERRA SESION

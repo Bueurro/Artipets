@@ -1,0 +1,53 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block contenido%}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="row">
+               <form action="" method="post" enctype="multipart/form-data"> <!--Formulario agregar producto-->
+                   {% csrf_token %}
+                   <table>
+                       {{ form }}
+                   </table>
+                   <input type="submit" class="btn btn-success" value="Guardar">
+               </form>
+               {{ mensaje }}
+            </div>                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="suscripciondonacion">
+    <a href=""><img src="{% static 'app/img/Artimember.jpg' %}" alt=""></a>
+</div>
+
+<!-- The Modal -->
+<div>
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+    <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+        <h4 class="modal-title">Haz el Seguimiento de tu pedido:</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-6"><div>Codigo: <input type="number" name="spnCodigoSeguimiento" id="spnCodigoSeguimiento"></div></div>
+                    <div class="col-sm-6"><p></p><div class="movder"><button type="button" class="btn btn-success"> Ver Seguimiento</button></div></div>
+                </div>
+            </div>                
+        </div>
+    </div>
+    </div>
+</div>
+</div>
+{% endblock%}

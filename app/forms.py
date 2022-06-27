@@ -2,8 +2,17 @@ from dataclasses import fields
 from django import forms
 from django.forms import ModelForm
 from .models import *
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+
 
 #creamos un template del formulario
+class RegistroUsuarioForm(UserCreationForm):
+    
+    class Meta:
+        model = User
+        fields = ['username','first_name','last_name','email','password1','password2']
+        #buscar siempre la base de datos con el sqlite
 
 class ProductoForm(ModelForm):
 
@@ -12,10 +21,10 @@ class ProductoForm(ModelForm):
 
     class Meta:
         model = Producto
-        fields = ['plu_codigo','stock','precio','preciooferta','nombre','marca','descripcion','tipo','imagen']
-   
+        fields = '__all__'
+        
 class UsuarioForm(ModelForm):
 
     class Meta:
         model = Usuario
-        fields = ['id_usuario','usuario','nombre','apellido','correo','direccion','contrasena','confirmar_contrasena']
+        fields = '__all__'

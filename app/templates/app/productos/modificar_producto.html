@@ -16,7 +16,20 @@
                    <input type="submit" class="btn btn-success mt-2 mb-2"" value="Modificar">
                    <a href="{% url 'listar_productos' %}" class="btn btn-secondary">Volver</a>
                </form>
-               {{ mensaje }}
+	            {% if messages %} <!--Mensaje nuevo-->
+                    {% for msj in messages %}
+                        <script>
+                            Swal.fire({
+                                title: 'Modificado!',
+                                text: '{{ msj }}',
+                                icon: 'success',
+                                showConfirmButton: false,
+                                timer: 2000
+                            });
+                        </script>
+                    {% endfor %}
+                {% endif %}
+               
             </div>                
         </div>
         <div class="col-sm-2"></div>

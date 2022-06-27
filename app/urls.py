@@ -4,7 +4,7 @@ from .views import *
 urlpatterns = [
     path('',index, name="index"),
     path('login',login, name="login"),
-    path('home',homelogin, name="homelogin"),
+    path('home/',homelogin, name="homelogin"),
     path('bandanas',bandanas, name="bandanas"),
     path('bandanasnl',bandanasnl, name="bandanasnl"),
     path('comidas',comidas, name="comidas"),
@@ -14,7 +14,7 @@ urlpatterns = [
     path('identificaciones',identificaciones, name="identificaciones"),
     path('identificacionesnl',identificacionesnl, name="identificacionesnl"),
     path('carrito',carrito, name="carrito"),
-    path('historial',historial, name="historial"),
+    path('historial/',historial, name="historial"),
     path('suscripcion',suscripcion, name="suscripcion"),
     path('agregar_producto',agregar_producto, name="agregar_producto"),
     path('modificar_producto/<plu_codigo>/',modificar_producto, name="modificar_producto"),
@@ -24,5 +24,8 @@ urlpatterns = [
     path('modificar_usuario/<id_usuario>/',modificar_usuario, name="modificar_usuario"),
     path('eliminar_usuario/<id_usuario>/',eliminar_usuario, name="eliminar_usuario"),
     path('listar_usuarios',listar_usuarios, name="listar_usuarios"),
+    path('registro_usuario',registro_usuario, name="registro_usuario"),
     path('pagar',pagar, name="pagar"),
+    path('eliminar_carrito/<id>/',eliminar_carrito, name="eliminar_carrito"),
+    path('seguimiento/',seguimiento,name="seguimiento"),
 ]

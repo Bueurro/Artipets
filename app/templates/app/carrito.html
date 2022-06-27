@@ -1,6 +1,9 @@
 {% extends 'app/baselogin.html' %}
 {% load static %}
 
+
+from js import*
+
 {% block contenido %}
 <div class="container-fluid mt-3">
   <div class="row">
@@ -19,20 +22,25 @@
           {% for aux in listacarrrito %}
           <tr>
             <td>
-              <a href=""> <img src="{{ aux.imagen.url }} " style="max-width: 100px;" alt="" class="img-fluid"></a>
+              <a href=""> <img src="{{ aux.plu_codigo.imagen.url }} " style="max-width: 100px;" alt="" class="img-fluid"></a>
             </td>
             <td>
-              <h5 class="mb-1">{{ aux.nombre_producto }}</h5>
+              <h5 class="mb-1">{{ aux.plu_codigo.nombre }}</h5>
             </td>
             <td>
-              <p>${{ aux.precio_producto }}</p>
+              <p>${{ aux.plu_codigo.precio }}</p>
             </td>
             <td>
-              <p>${{ aux.preciooferta }}</p>
+              <p>${{ aux.plu_codigo.preciooferta }}</p>
             </td>
             <td>
-                <p class="total-price front-weight-bold m-0">{{ aux.descripcion }}</p>
+                <p class="total-price front-weight-bold m-0">{{ aux.plu_codigo.descripcion }}</p>
             </td>
+            {% if perms.app.view_carrito_producto %}
+            <td>
+              <a onclick="epc({{ aux.id }})" class="btn btn-secondary"><i class="fa-solid fa-trash-can"></i></a>
+            </td>
+            {% endif %}
           </tr>
           {% endfor %}
         </tbody>
@@ -52,12 +60,19 @@
                 <tbody>
                     
                   <tr>
-                    <td  class="tgrand">subtotal:</td>
-                    <td  class="tgrand">$117.800</td>
+                    <!--hacer un if para mostrar el permiso de si esta suscrtito para mostrar el total con descuento o el total normalito--> 
+
+                    <td  class="tgrand">Total (Artimember) :</td>
+                    <td  class="tgrand">${{ TotalPagar  }}</td>
+                    
+                    <td  class="tgrand">Total:</td>
+                    <td  class="tgrand">${{ Total }}</td>
                   </tr>
                 </tbody>
               </table>
+
               <a type="submit" name="pagar" id="pagar" href="{% url 'pagar' %}" class="btnm carroboton">PAGAR</a>
+
         </div>
     </div>
 {% endblock %}

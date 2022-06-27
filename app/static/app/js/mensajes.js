@@ -32,6 +32,28 @@ function confirmarborrado(plu_codigo){
       })
 }
 
+function confirmarpagar(plu_codigo){
+  Swal.fire({
+      title: 'seguro que desea borrar?',
+      text: "no podra deshacer la accion",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: 'Si,Borrar',
+      cancelButtonColor: 'Cancelar',
+      confirmButtonText: 'Aceptar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Borrado!',
+          'El producto ha sido borrado',
+          'Hecho'
+        ).then(function() {
+            window.location.href = "/pagar/";
+        })
+      }
+    })
+}
+
 function popupusuario(id_usuario){
   Swal.fire({
       title: 'seguro que desea borrar?',
@@ -49,6 +71,28 @@ function popupusuario(id_usuario){
           'Hecho'
         ).then(function() {
             window.location.href = "/eliminar_usuario/"+ id_usuario +"/";
+        })
+      }
+    })
+}
+
+function epc(id){
+  Swal.fire({
+      title: 'seguro que desea borrar?',
+      text: "no podra deshacer la accion",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: 'Si,Borrar',
+      cancelButtonColor: 'Cancelar',
+      confirmButtonText: 'Aceptar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Borrado!',
+          'El producto ha sido borrado',
+          'Hecho'
+        ).then(function() {
+            window.location.href = "/eliminar_carrito/"+ id +"/";
         })
       }
     })
