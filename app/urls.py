@@ -27,5 +27,6 @@ urlpatterns = [
     path('registro_usuario',registro_usuario, name="registro_usuario"),
     path('pagar',pagar, name="pagar"),
     path('eliminar_carrito/<id>/',eliminar_carrito, name="eliminar_carrito"),
-    path('seguimiento/',seguimiento,name="seguimiento"),
+    path("api_digimon/", api_digimon, name='api_digimon'),
+    path('listaapi/',listaapi, name="listaapi"),
 ]

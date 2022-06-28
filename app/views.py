@@ -7,18 +7,6 @@ from .models import *
 from .forms import *
 from django.contrib.auth import authenticate, login
 import requests
-#---------------------
-from pickle import TRUE
-import requests
-from django.contrib import messages
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required, permission_required
-from django.shortcuts import render, redirect, get_object_or_404
-from .models import *
-from .forms import *
-from django.contrib.auth import authenticate, login
-import requests
 from itertools import count
 #---------------------
 
@@ -73,9 +61,9 @@ def bandanas(request):
         messages.success(request,'Producto guardado correctamente!')
 
         plu_codigo = request.POST.get('codigo_producto')
-        productoA = Producto.objects.get(plu_codigo=plu_codigo)
-        productoA.stock -= 1
-        productoA.save()
+        productostock = Producto.objects.get(plu_codigo=plu_codigo)
+        productostock.stock -= 1
+        productostock.save()
         messages.success(request,'Producto Enviado al carrito correctamente!')
         
     return render(request, 'app/bandanas.html', datos)
@@ -98,13 +86,29 @@ def comidas(request):
         tipoProducto = TipoProducto()
         tipoProducto.tipo = request.POST.get('tipo')
 
-        plu_codigo = request.POST.get('codigo_producto')
-        productoA = Producto.objects.get(plu_codigo=plu_codigo)
-        productoA.stock -= 1
-        productoA.save()
-        messages.success(request,'Producto Enviado al carrito correctamente!')
+        producto = Producto()
+        producto.plu_codigo = request.POST.get('codigo_producto')
+        producto.stock = request.POST.get('stock_producto')
+        producto.precio = request.POST.get('precio_producto')
+        producto.preciooferta = request.POST.get('preciooferta')         
+        producto.nombre = request.POST.get('nombre_producto')      
+        producto.marca = request.POST.get('marca_producto')  
+        producto.descripcion = request.POST.get('descripcion')
+        producto.imagen = request.POST.get('imagen_producto')
+        producto.tipo = tipoProducto
 
-    return render(request,'app/comidas.html',datos)
+        carrito = Carrito_Producto()
+        carrito.plu_codigo = producto
+        carrito.save()
+        messages.success(request,'Producto guardado correctamente!')
+
+        plu_codigo = request.POST.get('codigo_producto')
+        productostock = Producto.objects.get(plu_codigo=plu_codigo)
+        productostock.stock -= 1
+        productostock.save()
+        messages.success(request,'Producto Enviado al carrito correctamente!')
+        
+    return render(request, 'app/comidas.html', datos)
 
 def comidasnl(request):
     productosAll = Producto.objects.all()
@@ -144,13 +148,6 @@ def correas(request):
         productostock = Producto.objects.get(plu_codigo=plu_codigo)
         productostock.stock -= 1
         productostock.save()
-        messages.success(request,'Producto Enviado al carrito correctamente!')
-
-
-        plu_codigo = request.POST.get('codigo_producto')
-        productoA = Producto.objects.get(plu_codigo=plu_codigo)
-        productoA.stock -= 1
-        productoA.save()
         messages.success(request,'Producto Enviado al carrito correctamente!')
 
     return render(request,'app/correas.html',datos)
@@ -201,13 +198,6 @@ def identificaciones(request):
         productostock.save()
         messages.success(request,'Producto Enviado al carrito correctamente!')
 
-
-        plu_codigo = request.POST.get('codigo_producto')
-        productoA = Producto.objects.get(plu_codigo=plu_codigo)
-        productoA.stock -= 1
-        productoA.save()
-        messages.success(request,'Producto Enviado al carrito correctamente!')
-
     return render(request,'app/identificaciones.html',datos)
 
 def identificacionesnl(request):
@@ -221,16 +211,17 @@ def identificacionesnl(request):
 
 @permission_required('app.view_carrito_producto') #LISTO
 def carrito(request):
-
-    carritoAll = Carrito_Producto.objects.all()
+    carrito = Carrito_Producto.objects.all()
+    contador = Carrito_Producto.objects.count()
        
-    datos = { 'listacarrrito' : carritoAll,
+    datos = { 'listacarrrito' : carrito,
+              'contador' : contador,
                  
     
     # hacer un if para mostrar el permiso de si esta suscrtito para mostrar el total con descuento o el total normalito 
-    'Total': round(sum(c.plu_codigo.precio for c in carritoAll)),
-    'descuento_suscriptor': round(sum(c.plu_codigo.precio*0.05 for c in carritoAll)),
-    'TotalPagar': round(sum(c.plu_codigo.precio - c.plu_codigo.precio*0.05 for c in carritoAll)),
+    'Total': round(sum(v.plu_codigo.precio for v in carrito)),
+    'descuento_suscriptor': round(sum(v.plu_codigo.precio*0.05 for v in carrito)),
+    'TotalPagar': round(sum(v.plu_codigo.precio - v.plu_codigo.precio*0.05 for v in carrito)),
     
     }
 
@@ -240,20 +231,25 @@ def carrito(request):
 def eliminar_carrito(request, id):
     productocarro = Carrito_Producto.objects.get(id=id)
     productocarro.delete()
+   
+
+    
+
+    
 
     return redirect(to="carrito")
 
 
 @login_required 
 def pagar(request):
-    carritoall = Carrito_Producto.objects.all()
-    historiaAll = Historial.objects.all()
+    carrito = Carrito_Producto.objects.all()
+    historia = Historial.objects.all()
     producto = Producto.objects.all()
-    carritoall.delete()
+    carrito.delete()
 
     datos = {
-        'listaCarrrito' : carritoall,
-        'listaHistorial' : historiaAll
+        'listacarrrito' : carrito,
+        'listaHistorial' : historia,
     }
         #plu_codigo = request.POST.get('codigo_producto')
        # productoA = Producto.objects.get(plu_codigo=plu_codigo)
@@ -263,7 +259,8 @@ def pagar(request):
         historial = Historial() 
         historial.plu_codigo = carrito
         historial.save()
-               
+        historial.save()
+        
     return render(request, 'app/pagar.html',datos)
 
 
@@ -272,12 +269,14 @@ def pagar(request):
 
 @login_required
 def historial(request):
-    historialAll = Historial.objects.all()
+    historial = Historial.objects.all()
     contador = Historial.objects.count()
+
     datos = {
-        'listaHistorial' : historialAll,
+        'listaHistorial' : historial,
         'contador' : contador
     }
+    redirect  (to ='historial')
     return render(request, 'app/historial.html', datos)
 
 
@@ -285,9 +284,6 @@ def historial(request):
 @login_required 
 def suscripcion(request):
     return render(request,'app/suscripcion.html')
-
-def seguimiento(request):
-    return render(request,'app/seguimiento.html')
 
 #plushtmls
 
@@ -399,6 +395,24 @@ def registro_usuario(request):
         datos["form"] = formulario
 
     return render(request, 'registration/registro_usuario.html', datos)
+
+@login_required 
+def api_digimon(request):
+    response = requests.get('https://digimon-api.vercel.app/api/digimon').json()
+
+    datos = {
+        'listaDigimon' : response,
+    }
+    return render(request, 'app/api_digimon.html', datos)
+
+def listaapi(request):
+    response = requests.get('http://127.0.0.1:8000/api/producto/').json()
+
+    datos = { 
+        'ListaApi' : response
+        }
+
+    return render(request,'app/listas/listaapi.html',datos)
 
 #registro de usuarios 
 
