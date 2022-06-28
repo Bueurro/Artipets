@@ -11,71 +11,52 @@
     </div>
 </div>
 
-<input style="border-radius: 15px;border: solid 2px; padding: 5px;margin-left: 35px; margin-top: 15px" type="text" name="Codigop" placeholder="Codigo del pedido"> <a href=""><i class="fa-solid fa-magnifying-glass" style="color: black ;"></i></a>
-
-<h2 class="historialh2">COMPRA Codigo 13256</h2>
-<br>
-<div class="container-fluid ">
-    <div class="row">
-        <div class="col-sm-12 d-flex ">
-            <div class="col-sm-3"><div class="container mt-3">
-                <table class="table table-bordered">
-                  <thead>
-                    <tr>
-                        <th class="tgrand2">Pedido</th>                               
-                        <th class="tgrand2">Nombre</th>
-                        <th class="tgrand2">Codigo</th>
-                        <th class="tgrand2">Cantidad</th>
-                        <th class="tgrand2">Precio unidad</th>
-                        <th class="tgrand2">Total</th>
-                        <th class="tgrand2">Fecha</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                      
-                    <tr>
-                        <td class="tgrand2">1</td> 
-                        <td class="tgrand2">Modelo de Identificacion 3</td>
-                        <td class="tgrand2">565876</td>
-                        <td class="tgrand2">5</td>
-                        <td class="tgrand2">$4.000</td>
-                        <td class="tgrand2">$20.000</td>
-                        <td class="tgrand2">22/06/2022</td>
-                    </tr>
-                    <tr>
-                        <td class="tgrand2">2</td>
-                        <td class="tgrand2">Collar Navideño</td>
-                        <td class="tgrand2">768945</td>
-                        <td class="tgrand2">3</td>
-                        <td class="tgrand2">$9.500</td>
-                        <td class="tgrand2">$28.500</td>
-                        <td class="tgrand2">22/06/2022</td>
-                      </tr>
-                      <tr>
-                        <td class="tgrand2">3</td>
-                        <td class="tgrand2">Felines premium (20Kg)</td>
-                        <td class="tgrand2">908767</td>
-                        <td class="tgrand2">2</td>
-                        <td class="tgrand2">$20.400</td>
-                        <td class="tgrand2">$40.800</td>
-                        <td class="tgrand2">22/06/2022</td>
-                      </tr>
-                      <tr>
-                        <td class="tgrand2">4</td>
-                        <td class="tgrand2">Bandana de gato color negro</td>
-                        <td class="tgrand2">666777</td>
-                        <td class="tgrand2">3</td>
-                        <td class="tgrand2">$9.500</td>
-                        <td class="tgrand2">$28.500</td>
-                        <td class="tgrand2">22/06/2022</td>
-                      </tr>
-                  </tbody>
-                  
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-<div style="height: 179px;"></div>
+<section>
+  <div class="container-fluid">
+      <div class="row text-light">
+          <div class="col-sm-12 col-12"></div>
+          <div class="p-5">
+              <h1 class="display-3 text-center">Bienvenido a tu historial de compras.</h1>
+              <p class="lead mt-5">Total de Productos: {{ contador }}</p>
+              <hr class="my-2 mt-4">
+          </div>
+      </div>
+  </div>
+</section>
+<section>
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-sm-1 col"></div>
+          <div class="col-sm-10 col-12">
+              <div class="productos-comprados ">
+                  <div class="row">
+                      <div class="col-lg-8 col-sm-8 col-12">
+                          {% for aux in listaHistorial %}
+                          <div class="col-lg-12 col-12">
+                              <div class="carrito-cards d-flex">
+                                  <div class="card shadow">
+                                      <div class="card-body">
+                                          <h4 class="card-title">{{ aux.plu_codigo.marca }}</h4>
+                                          <h4 class="card-title">{{ aux.plu_codigo_id.marca }}</h4>
+                                          <p class="card-text">{{ aux.plu_codigo.nombre }}</p>
+                                          <p class="card-text">{{ aux.plu_codigo_id.nombre }}</p>
+                                          <p class="card-text">Precio: ${{ aux.precio }}</p>
+                                      </div>
+                                      {% if aux.id.imagen %}
+                                          <img class="card-img-top" src="{{ aux.codigo_id.imagen.url }}" alt="Card image">
+                                          {% else %}
+                                          <img src="{% static 'app/img/stock/stock-juego-1.jpg' %}" alt="">
+                                      {% endif %}
+                                  </div>
+                              </div>
+                          </div>
+                          {% endfor %}
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-sm-1 col"></div>
+      </div>
+  </div>
+</section>
 {% endblock %}

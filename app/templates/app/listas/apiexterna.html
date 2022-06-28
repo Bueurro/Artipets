@@ -1,0 +1,31 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block contenido %}
+<!--TITULO DE LA SECCION EN QUE SE ENCUETRA-->    
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 pdcsso">
+            <h2>Api Externa (Elden Ring)</h2>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 d-flex">
+            <div class="row">
+                {% for aux in ListaAOW %}
+                    <div class="col-sm-3 d-flex">
+                        <div class="card">
+                        <div class="card-header"> {{ aux.id }} {{ aux.name }} </div>
+                        <div class="card-body"><img src="{{ aux.image }}" alt=""></div>
+                        <div class="card-footer"><p>{{ aux.affinity }} {{ aux.description }} {{ aux.skill }}</p></div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -38,15 +38,21 @@
                             {% endif %}
                             <td>{{ aux.created_at }}</td>
                             <td>
+                                {% if perms.app.change_producto %}
                                 <a href="{% url 'modificar_producto' aux.plu_codigo %}" class="btn btn-info">Modificar</a>
                                 <a onclick="confirmarborrado({{ aux.plu_codigo }})" class="btn btn-danger">Eliminar</a>
+                                {% endif %}
                             </td>
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
                 <div style="height: 564px;">
+                    {% if perms.app.add_producto %}
+
                     <a href="agregar_producto" class="btn btn-info">Agregar Producto</a>
+                    
+                    {% endif %}
                 </div>
             </div>
         </div>

@@ -1,0 +1,49 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block contenido %}
+<!--TITULO DE LA SECCION EN QUE SE ENCUETRA-->    
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 pdcsso">
+            <h2>Lista BD</h2>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid">
+    <div class="row">
+        
+        <div class="col-sm-12 d-flex">
+            <div class="row">
+                {% for aux in listaProductos %}
+                <div class="col-sm-3 d-flex">
+                    <div class="conte">
+                        <div class="card gato">
+                            {% if aux.imagen %}
+                            <img src="{{ aux.imagen.url }}" alt="">
+                            {% else %}
+                            <img src="{% static 'app/img/productos/gato2.jpg' %}" alt="">
+                            {% endif %}
+                        </div>
+                        <div class="informacion">
+                            <h1>{{aux.nombre}}</h1>
+                            <p class="fecha">stock: {{aux.stock}}</p>
+                        </div>
+                        <div class="precio">
+                            <div class="box-precio">
+                                <span class="precio1"><H4>${{aux.preciooferta}} <i class="fa-solid fa-crown"></i></H4></span>
+                                <span class="precio2"><b>${{aux.precio}} </b></span>
+                                <i class="fa-solid fa-cart-plus"></i>
+    
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
