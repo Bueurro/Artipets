@@ -52,9 +52,7 @@
                                 {% if perms.app.view_usuario %}
                                 <a href="{% url 'listar_usuarios' %}"><button type="button" class="btn btn-secondary btnmedia"  data-bs-toggle="modal" data-bs-target="#ModalLogout"><i class="fa-solid fa-users"></i> lista usuarios</button></a>
                                     {% endif %}
-                                    {% if perms.app.view_producto %}
-                                    <a href="{% url 'listaapi' %}"><button type="button" class="btn btn-secondary btnmedia"  data-bs-toggle="modal" data-bs-target="#ModalLogout"><i class="fa-solid fa-boxes-stacked"></i>api</button></a>
-                        </div>          {% endif %}
+                        </div>
                         {% if user.is_authenticated %}
                         <div><h6 class="nombreUsuario"><li>Bienvenido: {{ user.username }}</h6></div>
                         {% endif %}
