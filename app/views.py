@@ -223,6 +223,7 @@ def identificacionesnl(request):
 
 @login_required #LISTO
 def carrito(request):
+    productosAll = Producto.objects.all()
     propietario = request.user.username
     carritoAll = Carrito_Producto.objects.filter(usuario_car = propietario)
     contador = 0
@@ -244,7 +245,8 @@ def carrito(request):
     datos = {
         'listacarrrito' : carritoAll,
         'contador' : contador,
-        'Total': total
+        'Total': total,
+        'Carrovacio' : productosAll,
     }
 
     return render(request, 'app/carrito.html',datos)

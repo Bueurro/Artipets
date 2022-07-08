@@ -142,6 +142,38 @@ Footer{
     font-size: large;
 }
 
+
+/*CARTA DESTACAS (Que estan en el home)*/
+.cartacss2{
+    margin-top: 30px;
+    margin-bottom: 40px;
+    margin-right: 10px;
+    margin-LEFT: 10px;
+    min-height: 450px;
+    box-shadow: 0 0 15px rgb(0, 0,0) ;
+    padding-bottom: 25px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/*ANIMACION DE LOS PRODUCTOS DESTACADOS*/
+.cartacss2 :hover{
+    transition: 0.5s all;
+    transform: scale(0.9);
+    cursor: pointer;
+}
+
+
+.cartacss2 .card-link{
+    color: black;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: large;
+}
+
+.imgcartas2{
+    max-width: 250px
+}
 /*CARTAs DESTACAS (Que estan en el home)*/
 
 
@@ -344,12 +376,9 @@ Footer{
     border: 5px solid rgb(72, 46, 100);
     box-shadow: 0px 0px 10px rgb(0, 0, 0);
     display: flex;
+
 }
 
-.carrosp p{
-    margin-left: 400px;
-    font-size: large;
-}
 
 
 /*SUSCRIPCIONES*/

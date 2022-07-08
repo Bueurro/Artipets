@@ -86,22 +86,38 @@ from js import*
 
 
     {% else %}
-    <div style="height: 494px;">
+    <div style="height: fit-content;">
       <div class="container-fluid">
         <div class="row">
           <div class="col-sm-12">
             <div class="row">
-              <div class="col-sm-2"></div>
-              <div class="col-sm-8 text-center mt-2 mb-2">
+              <div class="col-sm-12 text-center mt-2 mb-4">
 
                 <H2>No hay ningún producto en el carrito</H2>
+                <p style="font-size: large;">Puedes echarle un vistaso a nuestros productos destacados.</p>
                 <div class="carrosp">
-                  <p>Puedes echarle un vistaso a nuestros productos.</p>
-                  
+                  {% for aux in Carrovacio %}
+                  {% if aux.tipo.tipo == 'destacado' %}
+                  <div class="col-sm-3">
+                      <div class="card cartacss2">
+                          <div class="card-body">
+                            <h4 class= "card-title">{{aux.nombre}}</h4>
+                              {% if aux.imagen %} <!--Cambio de aqui hasta...-->
+                              <img src="{{ aux.imagen.url }}" class="imgcartas2">
+                              {% else %}
+                              <img src="{% static 'app/img/productos/Screenshot_20.png' %}" alt="" class="imgcartas2">
+                              {% endif %}
+                            <!--Aca...-->
+                            <p></p>
+                          </div>
+                          <a href="#" class="card-link">{{aux.descripcion}}</a>
+                      </div>
+                  </div>
+                  {% endif %}
+                  {% endfor %}
                 </div>
 
               </div>
-              <div class="col-sm-2"></div>
             </div>
           </div>
         </div>
