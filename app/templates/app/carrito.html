@@ -5,76 +5,109 @@
 from js import*
 
 {% block contenido %}
+{% if listacarrrito %}
 <div class="container-fluid mt-3">
   <div class="row">
     <div class="col-sm-8">
-      <table class="table table-bordered table-striped">
-        <thead>  
+        <table class="table table-bordered table-striped">
+          <thead>  
+              <tr>
+                  <th>Imagen</th>
+                  <th>Nombre</th>
+                  <th>Precio</th>
+                  <th>Precio Artimember</th>
+                  <th>Descripción</th>
+                  <th>Cantidad</th>
+                  <th>Eliminar</th>
+              </tr>
+          </thead>
+          <tbody>
+            {% for aux in listacarrrito %}
             <tr>
-                <th>Imagen</th>
-                <th>Nombre</th>
-                <th>Precio</th>
-                <th>Precio Artimember</th>
-                <th>descripción</th>
+              <td>
+                <a href=""> <img src="{{ aux.imagen_car.url }} " style="max-width: 100px;" alt="" class="img-fluid"></a>
+              </td>
+              <td>
+                <h5 class="mb-1">{{ aux.nombre_car }}</h5>
+              </td>
+              <td>
+                <p>${{ aux.precio_car }}</p>
+              </td>
+              <td>
+                <p>${{ aux.preciooferta_car }}</p>
+              </td>
+              <td>
+                  <p class="total-price front-weight-bold m-0">{{ aux.descripcion_car }}</p>
+              </td>
+              <td>
+                {{ aux.cantidad }}
+              </td>
+              {% if perms.app.view_carrito_producto %}
+              <td>
+                <a onclick="epc({{ aux.car_codigo }})" class="btn btn-danger"><i class="fa-solid fa-minus"></i> <i class="fa-solid fa-1"></i></a>
+              </td>
+              {% endif %}
             </tr>
-        </thead>
-        <h2 class="m-5">{{ contador }} Producto/s en el carrito.</h2>
-        <tbody>
-          {% for aux in listacarrrito %}
-          <tr>
-            <td>
-              <a href=""> <img src="{{ aux.plu_codigo.imagen.url }} " style="max-width: 100px;" alt="" class="img-fluid"></a>
-            </td>
-            <td>
-              <h5 class="mb-1">{{ aux.plu_codigo.nombre }}</h5>
-            </td>
-            <td>
-              <p>${{ aux.plu_codigo.precio }}</p>
-            </td>
-            <td>
-              <p>${{ aux.plu_codigo.preciooferta }}</p>
-            </td>
-            <td>
-                <p class="total-price front-weight-bold m-0">{{ aux.plu_codigo.descripcion }}</p>
-            </td>
-            {% if perms.app.view_carrito_producto %}
-            <td>
-              <a onclick="epc({{ aux.id }})" class="btn btn-secondary"><i class="fa-solid fa-trash-can"></i></a>
-            </td>
-            {% endif %}
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+            {% endfor %}
+          </tbody>
+        </table>
+        
+      </div>
+      <div class="col-sm-4"></div>
     </div>
-    <div class="col-sm-4"></div>
   </div>
-</div>
 
-
-<div class="container-fluid">
+  <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-12 d-flex justify-content-end">
-            <div class="col-sm-6">
-
-                </div>
-            <div class="col-sm-6 d-flex justify-content-end" ><table class="table table-bordered">
-                <tbody>
-                    
-                  <tr>
-                    <!--hacer un if para mostrar el permiso de si esta suscrtito para mostrar el total con descuento o el total normalito--> 
-
-                    <td  class="tgrand">Total (Artimember) :</td>
-                    <td  class="tgrand">${{ TotalPagar  }}</td>
-                    
-                    <td  class="tgrand">Total:</td>
-                    <td  class="tgrand">${{ Total }}</td>
-                  </tr>
-                </tbody>
-              </table>
-
-              <a type="submit" name="pagar" id="pagar" href="{% url 'pagar' %}" class="btnm carroboton">PAGAR</a>
-
+      <div class="col-sm-12 d-flex justify-content-end">
+        <div class="col-sm-6">
+          
         </div>
+        <div class="col-sm-6 d-flex justify-content-end" ><table class="table table-bordered">
+          <tbody>
+            
+            <tr>
+              <!--hacer un if para mostrar el permiso de si esta suscrtito para mostrar el total con descuento o el total normalito--> 
+              
+              {% if Total == contador %}
+              <td  class="tgrand">Total:</td>
+              <td  class="tgrand">${{ contador }}</td>
+              {% else %}
+              <td  class="tgrand">Total (Artimember) :</td>
+              <td  class="tgrand">${{ Total }}</td>
+              {% endif %}
+            </tr>
+          </tbody>
+        </table>
+        <a type="submit" name="pagar" id="pagar" href="{% url 'pagar' %}" class="btnm carroboton">PAGAR</a>
+      </div>
     </div>
-{% endblock %}
+    <div style="height: 220px;"></div>
+
+
+    {% else %}
+    <div style="height: 494px;">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-sm-2"></div>
+              <div class="col-sm-8 text-center mt-2 mb-2">
+
+                <H2>No hay ningún producto en el carrito</H2>
+                <div class="carrosp">
+                  <p>Puedes echarle un vistaso a nuestros productos.</p>
+                  
+                </div>
+
+              </div>
+              <div class="col-sm-2"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% endif %}
+
+    {% endblock %}

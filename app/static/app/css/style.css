@@ -336,8 +336,19 @@ Footer{
 }
 /*FIN DE CARTAS DE PRODUCTOS*/
 
-.txtas{
-    
+.carrosp{
+    margin-top: 15px;
+    background-color: antiquewhite;
+    padding: 15px 15px 15px 15px;
+    border-radius: 15px;
+    border: 5px solid rgb(72, 46, 100);
+    box-shadow: 0px 0px 10px rgb(0, 0, 0);
+    display: flex;
+}
+
+.carrosp p{
+    margin-left: 400px;
+    font-size: large;
 }
 
 

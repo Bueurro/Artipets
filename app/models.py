@@ -29,35 +29,41 @@ class Producto(models.Model):
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
 
-    def __int__(self):
-        return self.plu_codigo
+    def __str__(self):
+        return self.nombre
     
+
 
     class Meta:
         db_table = 'db_producto'
 
 class Carrito_Producto(models.Model):
-    plu_codigo = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    car_codigo = models.AutoField(primary_key=True)
+    imagen_car = models.ImageField(upload_to="carrito", null = True)
+    nombre_car = models.CharField(max_length=60)
+    precio_car = models.IntegerField()
+    preciooferta_car = models.IntegerField()
+    descripcion_car = models.CharField(max_length=80)
+    cantidad = models.IntegerField()
+    totales =  models.IntegerField(blank=True)
+    usuario_car = models.CharField(max_length=20)
 
     def __str__(self):
-        return self.plu_codigo
+        return self.nombre_car
     
     class Meta:
-        db_table = 'db_carrito_producto'
-
+        db_table = 'db_carrito'
 
 class Usuario(models.Model):
-    id_usuario = models.IntegerField(null=False,primary_key=True)
-    usuario = models.CharField(max_length=20)
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
     nombre = models.CharField(max_length=25)
     apellido = models.CharField(max_length=25)
     correo = models.CharField(max_length=30)
     direccion = models.CharField(max_length=50)
-    contrasena = models.CharField(max_length=20)
-    confirmar_contrasena = models.CharField(max_length=20)
+    suscripcion = models.BooleanField()
 
-    def __int__(self):
-        return self.id_usuario
+    def __str__(self):
+        return str(self.usuario.username)
     
     class Meta:
         db_table = 'db_usuario'
@@ -72,14 +78,6 @@ class Suscriptor(models.Model):
 
     class Meta:
         db_table = 'db_suscriptor'
-
-class Historial(models.Model):
-    plu_codigo = models.ForeignKey(Carrito_Producto, on_delete=models.CASCADE)
-
-    class Meta:
-        db_table = "db_Historial"        
-
-
 
 
 

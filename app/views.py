@@ -41,31 +41,43 @@ def bandanas(request):
         }
     
     if request.method == 'POST':
+        pcodigo = request.POST.get('car_codigo')
+        producto = Producto.objects.get(plu_codigo=pcodigo)
+
         tipoProducto = TipoProducto()
         tipoProducto.tipo = request.POST.get('tipo')
-
-        producto = Producto()
-        producto.plu_codigo = request.POST.get('codigo_producto')
-        producto.stock = request.POST.get('stock_producto')
-        producto.precio = request.POST.get('precio_producto')
-        producto.preciooferta = request.POST.get('preciooferta')         
-        producto.nombre = request.POST.get('nombre_producto')      
-        producto.marca = request.POST.get('marca_producto')  
-        producto.descripcion = request.POST.get('descripcion')
-        producto.imagen = request.POST.get('imagen_producto')
-        producto.tipo = tipoProducto
-
+        productostock = Producto.objects.get(plu_codigo=pcodigo)
         carrito = Carrito_Producto()
-        carrito.plu_codigo = producto
-        carrito.save()
-        messages.success(request,'Producto guardado correctamente!')
 
-        plu_codigo = request.POST.get('codigo_producto')
-        productostock = Producto.objects.get(plu_codigo=plu_codigo)
-        productostock.stock -= 1
-        productostock.save()
-        messages.success(request,'Producto Enviado al carrito correctamente!')
-        
+        if producto.stock > 0:
+            productostock.stock -= 1
+            productostock.save()
+            
+            codigop = request.POST.get('car_codigo')
+            cantidadprod = Carrito_Producto.objects.filter(car_codigo=codigop)
+            
+            if cantidadprod:
+                cont = Carrito_Producto.objects.get(car_codigo=pcodigo)
+                cont.cantidad += 1
+                cont.save()
+
+            else:
+                cont = Carrito_Producto()
+                cont.car_codigo = request.POST.get('car_codigo')
+                cont.imagen_car = request.POST.get('imagen_car')
+                cont.nombre_car = request.POST.get('nombre_car')
+                cont.precio_car = request.POST.get('precio_car')
+                cont.preciooferta_car = request.POST.get('preciooferta_car')
+                cont.descripcion_car = request.POST.get('descripcion_car')
+                cont.cantidad = 1
+                cont.totales = 0
+                cont.usuario_car = request.user.username
+                cont.save()
+
+            messages.success(request,'Producto Enviado al carrito correctamente!')
+        else:
+            messages.success(request, 'No hay existencias para agregar al carrito')
+    
     return render(request, 'app/bandanas.html', datos)
 
 def bandanasnl(request):
@@ -209,38 +221,55 @@ def identificacionesnl(request):
 
 #logOptions
 
-@permission_required('app.view_carrito_producto') #LISTO
+@login_required #LISTO
 def carrito(request):
-    carrito = Carrito_Producto.objects.all()
-    contador = Carrito_Producto.objects.count()
-       
-    datos = { 'listacarrrito' : carrito,
-              'contador' : contador,
-                 
-    
-    # hacer un if para mostrar el permiso de si esta suscrtito para mostrar el total con descuento o el total normalito 
-    'Total': round(sum(v.plu_codigo.precio for v in carrito)),
-    'descuento_suscriptor': round(sum(v.plu_codigo.precio*0.05 for v in carrito)),
-    'TotalPagar': round(sum(v.plu_codigo.precio - v.plu_codigo.precio*0.05 for v in carrito)),
-    
+    propietario = request.user.username
+    carritoAll = Carrito_Producto.objects.filter(usuario_car = propietario)
+    contador = 0
+
+
+    for producto in carritoAll:
+        producto.totales = producto.precio_car * producto.cantidad
+        producto.save()
+        contador = contador + producto.totales
+
+    usuarioq = request.user
+    userx = Usuario.objects.get(usuario = usuarioq)
+
+    if userx.suscripcion == True:
+        total = round(contador - ( contador * 0.05))
+    else:
+        total = round(contador)
+
+    datos = {
+        'listacarrrito' : carritoAll,
+        'contador' : contador,
+        'Total': total
     }
 
     return render(request, 'app/carrito.html',datos)
 
-@permission_required('app.view_carrito_producto')
-def eliminar_carrito(request, id):
-    productocarro = Carrito_Producto.objects.get(id=id)
-    productocarro.delete()
-   
 
-    
+@login_required
+def eliminar_carrito(request, car_codigo):
 
-    
+    productocarro = Carrito_Producto.objects.get(car_codigo=car_codigo)
+    productos = Producto.objects.get(plu_codigo=car_codigo)
+
+    if productocarro.cantidad > 1:
+        productocarro.cantidad -= 1 
+        productocarro.save()
+        productos.stock += 1
+        productos.save()
+    else:
+        productocarro.delete()
+        productos.stock += 1
+        productos.save()
 
     return redirect(to="carrito")
 
 
-@login_required 
+@login_required
 def pagar(request):
     carrito = Carrito_Producto.objects.all()
     historia = Historial.objects.all()
@@ -264,9 +293,6 @@ def pagar(request):
     return render(request, 'app/pagar.html',datos)
 
 
-
-        
-
 @login_required
 def historial(request):
     historial = Historial.objects.all()
@@ -278,7 +304,6 @@ def historial(request):
     }
     redirect  (to ='historial')
     return render(request, 'app/historial.html', datos)
-
 
 
 @login_required 
@@ -415,15 +440,3 @@ def listaapi(request):
     return render(request,'app/listas/listaapi.html',datos)
 
 #registro de usuarios 
-
-#def registro_usuarios(request):
-    #datos = {
-       # 'form' : RegistroUsuarioForm()
-   # }    
-    #if request.method == 'POST':
-        #formulario = RegistroUsuarioForm(request.POST)
-        #if formulario.is_valid():
-           # formulario.save()
-           # messages.success(request,'usuario registradocorrectamente!')
-            
-  #  return render(request,'registration/registro_usuario.html',datos)

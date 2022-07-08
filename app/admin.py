@@ -14,8 +14,8 @@ class ProductoAdmin(admin.ModelAdmin):
 
 
 class UsuarioAdmin(admin.ModelAdmin):
-    list_display = ['id_usuario','usuario','nombre','apellido','correo','direccion','contrasena'] #mostrar el producto ordenado por sus caracteristicas
-    search_fields =['id_usuario,usuario'] #Un buscador que segun el parametro va ser por lo que busquemos
+    list_display = ['usuario','nombre','apellido','correo','direccion'] #mostrar el producto ordenado por sus caracteristicas
+    search_fields =['usuario'] #Un buscador que segun el parametro va ser por lo que busquemos
     list_per_page = 5 # son los productos que se muestran por pagina
 
 
