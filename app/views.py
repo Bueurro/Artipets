@@ -8,6 +8,7 @@ from .forms import *
 from django.contrib.auth import authenticate, login
 import requests
 from itertools import count
+from datetime import date
 #---------------------
 
 
@@ -47,7 +48,6 @@ def bandanas(request):
         tipoProducto = TipoProducto()
         tipoProducto.tipo = request.POST.get('tipo')
         productostock = Producto.objects.get(plu_codigo=pcodigo)
-        carrito = Carrito_Producto()
 
         if producto.stock > 0:
             productostock.stock -= 1
@@ -95,30 +95,41 @@ def comidas(request):
         }
     
     if request.method == 'POST':
+        pcodigo = request.POST.get('car_codigo')
+        producto = Producto.objects.get(plu_codigo=pcodigo)
+
         tipoProducto = TipoProducto()
         tipoProducto.tipo = request.POST.get('tipo')
+        productostock = Producto.objects.get(plu_codigo=pcodigo)
 
-        producto = Producto()
-        producto.plu_codigo = request.POST.get('codigo_producto')
-        producto.stock = request.POST.get('stock_producto')
-        producto.precio = request.POST.get('precio_producto')
-        producto.preciooferta = request.POST.get('preciooferta')         
-        producto.nombre = request.POST.get('nombre_producto')      
-        producto.marca = request.POST.get('marca_producto')  
-        producto.descripcion = request.POST.get('descripcion')
-        producto.imagen = request.POST.get('imagen_producto')
-        producto.tipo = tipoProducto
+        if producto.stock > 0:
+            productostock.stock -= 1
+            productostock.save()
+            
+            codigop = request.POST.get('car_codigo')
+            cantidadprod = Carrito_Producto.objects.filter(car_codigo=codigop)
+            
+            if cantidadprod:
+                cont = Carrito_Producto.objects.get(car_codigo=pcodigo)
+                cont.cantidad += 1
+                cont.save()
 
-        carrito = Carrito_Producto()
-        carrito.plu_codigo = producto
-        carrito.save()
-        messages.success(request,'Producto guardado correctamente!')
+            else:
+                cont = Carrito_Producto()
+                cont.car_codigo = request.POST.get('car_codigo')
+                cont.imagen_car = request.POST.get('imagen_car')
+                cont.nombre_car = request.POST.get('nombre_car')
+                cont.precio_car = request.POST.get('precio_car')
+                cont.preciooferta_car = request.POST.get('preciooferta_car')
+                cont.descripcion_car = request.POST.get('descripcion_car')
+                cont.cantidad = 1
+                cont.totales = 0
+                cont.usuario_car = request.user.username
+                cont.save()
 
-        plu_codigo = request.POST.get('codigo_producto')
-        productostock = Producto.objects.get(plu_codigo=plu_codigo)
-        productostock.stock -= 1
-        productostock.save()
-        messages.success(request,'Producto Enviado al carrito correctamente!')
+            messages.success(request,'Producto Enviado al carrito correctamente!')
+        else:
+            messages.success(request, 'No hay existencias para agregar al carrito')
         
     return render(request, 'app/comidas.html', datos)
 
@@ -137,30 +148,41 @@ def correas(request):
         }
     
     if request.method == 'POST':
+        pcodigo = request.POST.get('car_codigo')
+        producto = Producto.objects.get(plu_codigo=pcodigo)
+
         tipoProducto = TipoProducto()
         tipoProducto.tipo = request.POST.get('tipo')
+        productostock = Producto.objects.get(plu_codigo=pcodigo)
 
-        producto = Producto()
-        producto.plu_codigo = request.POST.get('codigo_producto')
-        producto.stock = request.POST.get('stock_producto')
-        producto.precio = request.POST.get('precio_producto')
-        producto.preciooferta = request.POST.get('preciooferta')         
-        producto.nombre = request.POST.get('nombre_producto')      
-        producto.marca = request.POST.get('marca_producto')  
-        producto.descripcion = request.POST.get('descripcion')
-        producto.imagen = request.POST.get('imagen_producto')
-        producto.tipo = tipoProducto
+        if producto.stock > 0:
+            productostock.stock -= 1
+            productostock.save()
+            
+            codigop = request.POST.get('car_codigo')
+            cantidadprod = Carrito_Producto.objects.filter(car_codigo=codigop)
+            
+            if cantidadprod:
+                cont = Carrito_Producto.objects.get(car_codigo=pcodigo)
+                cont.cantidad += 1
+                cont.save()
 
-        carrito = Carrito_Producto()
-        carrito.plu_codigo = producto
-        carrito.save()
-        messages.success(request,'Producto guardado correctamente!')
+            else:
+                cont = Carrito_Producto()
+                cont.car_codigo = request.POST.get('car_codigo')
+                cont.imagen_car = request.POST.get('imagen_car')
+                cont.nombre_car = request.POST.get('nombre_car')
+                cont.precio_car = request.POST.get('precio_car')
+                cont.preciooferta_car = request.POST.get('preciooferta_car')
+                cont.descripcion_car = request.POST.get('descripcion_car')
+                cont.cantidad = 1
+                cont.totales = 0
+                cont.usuario_car = request.user.username
+                cont.save()
 
-        plu_codigo = request.POST.get('codigo_producto')
-        productostock = Producto.objects.get(plu_codigo=plu_codigo)
-        productostock.stock -= 1
-        productostock.save()
-        messages.success(request,'Producto Enviado al carrito correctamente!')
+            messages.success(request,'Producto Enviado al carrito correctamente!')
+        else:
+            messages.success(request, 'No hay existencias para agregar al carrito')
 
     return render(request,'app/correas.html',datos)
 
@@ -179,36 +201,41 @@ def identificaciones(request):
     }
 
     if request.method == 'POST':
-        productosAll = Producto.objects.all()
-    datos = { 
-        'listaProductos' : productosAll,
-        }
-    
-    if request.method == 'POST':
+        pcodigo = request.POST.get('car_codigo')
+        producto = Producto.objects.get(plu_codigo=pcodigo)
+
         tipoProducto = TipoProducto()
         tipoProducto.tipo = request.POST.get('tipo')
+        productostock = Producto.objects.get(plu_codigo=pcodigo)
 
-        producto = Producto()
-        producto.plu_codigo = request.POST.get('codigo_producto')
-        producto.stock = request.POST.get('stock_producto')
-        producto.precio = request.POST.get('precio_producto')
-        producto.preciooferta = request.POST.get('preciooferta')         
-        producto.nombre = request.POST.get('nombre_producto')      
-        producto.marca = request.POST.get('marca_producto')  
-        producto.descripcion = request.POST.get('descripcion')
-        producto.imagen = request.POST.get('imagen_producto')
-        producto.tipo = tipoProducto
+        if producto.stock > 0:
+            productostock.stock -= 1
+            productostock.save()
+            
+            codigop = request.POST.get('car_codigo')
+            cantidadprod = Carrito_Producto.objects.filter(car_codigo=codigop)
+            
+            if cantidadprod:
+                cont = Carrito_Producto.objects.get(car_codigo=pcodigo)
+                cont.cantidad += 1
+                cont.save()
 
-        carrito = Carrito_Producto()
-        carrito.plu_codigo = producto
-        carrito.save()
-        messages.success(request,'Producto guardado correctamente!')
+            else:
+                cont = Carrito_Producto()
+                cont.car_codigo = request.POST.get('car_codigo')
+                cont.imagen_car = request.POST.get('imagen_car')
+                cont.nombre_car = request.POST.get('nombre_car')
+                cont.precio_car = request.POST.get('precio_car')
+                cont.preciooferta_car = request.POST.get('preciooferta_car')
+                cont.descripcion_car = request.POST.get('descripcion_car')
+                cont.cantidad = 1
+                cont.totales = 0
+                cont.usuario_car = request.user.username
+                cont.save()
 
-        plu_codigo = request.POST.get('codigo_producto')
-        productostock = Producto.objects.get(plu_codigo=plu_codigo)
-        productostock.stock -= 1
-        productostock.save()
-        messages.success(request,'Producto Enviado al carrito correctamente!')
+            messages.success(request,'Producto Enviado al carrito correctamente!')
+        else:
+            messages.success(request, 'No hay existencias para agregar al carrito')
 
     return render(request,'app/identificaciones.html',datos)
 
@@ -273,26 +300,33 @@ def eliminar_carrito(request, car_codigo):
 
 @login_required
 def pagar(request):
-    carrito = Carrito_Producto.objects.all()
-    historia = Historial.objects.all()
-    producto = Producto.objects.all()
-    carrito.delete()
+    usuarioq = request.user.username
+    CarritoAll = Carrito_Producto.objects.filter(usuario_car = usuarioq)
 
-    datos = {
-        'listacarrrito' : carrito,
-        'listaHistorial' : historia,
-    }
-        #plu_codigo = request.POST.get('codigo_producto')
-       # productoA = Producto.objects.get(plu_codigo=plu_codigo)
-    if request.method == 'POST':
-        producto = Producto.objects.get(plu_codigo=request.POST.get('codigo_producto'))
-        carrito = Carrito_Producto.objects.get(plu_codigo=producto)
-        historial = Historial() 
-        historial.plu_codigo = carrito
-        historial.save()
-        historial.save()
+    productosl = " "
+    for producto in CarritoAll:
+        productosl = "" + productosl + producto.nombre_car + " [" + str(producto.cantidad) + "] | "
+
+    fecha = date.today()
+    cantidad_productos = len(CarritoAll)
+
+    total = 0
+    for producto in CarritoAll:
+        total = total + producto.totales
+
+    cliente = request.user.username 
+
+    pedido = Pedido()
+    pedido.productos = productosl
+    pedido.cantidad = cantidad_productos
+    pedido.total = total
+    pedido.fecha = fecha
+    pedido.estado = "En Preparación"
+    pedido.cliente = cliente
+    pedido.save()
+    CarritoAll.delete()
         
-    return render(request, 'app/pagar.html',datos)
+    return render(request, 'app/pagar.html')
 
 
 @login_required
@@ -441,4 +475,30 @@ def listaapi(request):
 
     return render(request,'app/listas/listaapi.html',datos)
 
-#registro de usuarios 
+def tests(request):
+    productosAll = Producto.objects.all()
+    propietario = request.user.username
+    carritoAll = Carrito_Producto.objects.filter(usuario_car = propietario)
+    contador = 0
+
+
+    for producto in carritoAll:
+        producto.totales = producto.precio_car * producto.cantidad
+        producto.save()
+        contador = contador + producto.totales
+
+    usuarioq = request.user
+    userx = Usuario.objects.get(usuario = usuarioq)
+
+    if userx.suscripcion == True:
+        total = round(contador - ( contador * 0.05))
+    else:
+        total = round(contador)
+
+    datos = {
+        'listacarrrito' : carritoAll,
+        'contador' : contador,
+        'Total': total,
+        'Carrovacio' : productosAll,
+    }
+    return render(request, 'app/tests.html',datos)

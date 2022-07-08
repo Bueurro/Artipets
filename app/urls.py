@@ -29,4 +29,5 @@ urlpatterns = [
     path('eliminar_carrito/<car_codigo>/',eliminar_carrito, name="eliminar_carrito"),
     path("api_digimon/", api_digimon, name='api_digimon'),
     path('listaapi/',listaapi, name="listaapi"),
+    path('tests/',tests, name="tests"),
 ]

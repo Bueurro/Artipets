@@ -376,7 +376,6 @@ Footer{
     border: 5px solid rgb(72, 46, 100);
     box-shadow: 0px 0px 10px rgb(0, 0, 0);
     display: flex;
-
 }
 
 
@@ -529,14 +528,95 @@ Footer{
 }
 /*FIN DEL CARRITO*/
 
+
+
+.carrobg{
+    background-image: url(../img/bg3.jpg);
+
+}
+
+.axdxd{
+    height: 300px;
+}
+
+.productocar{
+    background-color: rgb(96, 62, 133);
+    border: 2px solid #9d66da;
+    border-radius: 25px;
+    padding: 25px 15px 15px 15px;
+    width: fit-content;
+    text-transform: capitalize;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    color: #ffffff;
+    min-width: 800px;
+}
+
 .carroboton{
-    margin-right:235px;
+    text-decoration: none;
+    color: black;
     padding: 10px;
-    border-radius: 12px;
-    min-height: 50px;
-    box-shadow: 0px 0px 5px black;
+    border-radius: 15px;
+    min-height: fit-content;
+    box-shadow: 2px 2px 3px rgb(126, 126, 126);
     border: 2px solid rgb(96, 62, 133);
-    background-color: rgb(159, 113, 207);
+    background-color: antiquewhite;
+}
+
+.carroboton:hover{
+    color: #111;
+}
+
+.carrobotonartimember{
+    text-decoration: none;
+    color: #111;
+    font-weight: 500;
+    font-size: large;
+    padding: 10px;
+    border-radius: 15px;
+    min-height: fit-content;
+    box-shadow: 2px 2px 3px rgb(126, 126, 126);
+    border: 2px solid rgb(179, 179, 0);
+    background-color: yellow;
+}
+
+.carrobotonartimember:hover{
+    color: rgb(170, 130, 28);
+}
+
+.productocar .der{
+    margin-top: 22px;
+}
+
+.productocar a img{
+    margin-top: 22px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    max-width: 150px;
+}
+
+.seccionpago{
+    background-color: rgb(113, 81, 148);
+    border: 2px solid #9d66da;
+    border-radius: 25px;
+    padding: 25px 15px 15px 15px;
+    width: fit-content;
+    text-transform: capitalize;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    color: #ffffff;
+    min-width: 400px;
+    max-width: 400px;
+}
+
+.seccionpago a{
+    width: 365px;
+}
+
+.totalartimember{
+    color: gold;
 }
 
 /*subs*/
@@ -634,6 +714,9 @@ Footer{
         min-width: 20px;
         font-size: 15px;
     }
+    .carrosp{
+        display: block;
+    }
 }
 
 @media (max-width: 575px){
@@ -645,6 +728,9 @@ Footer{
         width: 389px;
         height: fit-content;
         margin-top: 30px;
+    }
+    .carrosp{
+        display: block;
     }
 }
 
@@ -731,4 +817,54 @@ Footer{
         height: fit-content;
         margin-top: 30px;
     }
+    
+    .axdxd{
+        height: 100px;
+    }
+
+    .productocar{
+        padding: 10px;
+        text-transform: capitalize;
+        text-align: center;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        font-size: 12px;
+        min-width: 300px;
+        max-width: 300px;
+    }
+
+    .productocar h5{
+        font-size: 16px;
+    }
+
+    .productocar .der{
+        margin-top: 15px;
+    }
+    
+    .productocar a img{
+        margin-top: 22px;
+        border-radius: 10px;
+        margin-bottom: 10;
+        max-width: 100px;
+    }
+
+    .seccionpago{
+        margin-left: 32px;
+        width: fit-content;
+        text-transform: capitalize;
+        text-align: center;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        color: #ffffff;
+        min-width: 300px;
+        max-width: 300px;
+    }
+    
+    .seccionpago a{
+        width: max-content;
+    }
+    .carrosp{
+        display: block;
+    }
+
 }

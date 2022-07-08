@@ -5,125 +5,80 @@
 from js import*
 
 {% block contenido %}
-{% if listacarrrito %}
-<div class="container-fluid mt-3">
+
+<div class="container-fluid">
   <div class="row">
-    <div class="col-sm-8">
-        <table class="table table-bordered table-striped">
-          <thead>  
-              <tr>
-                  <th>Imagen</th>
-                  <th>Nombre</th>
-                  <th>Precio</th>
-                  <th>Precio Artimember</th>
-                  <th>Descripción</th>
-                  <th>Cantidad</th>
-                  <th>Eliminar</th>
-              </tr>
-          </thead>
-          <tbody>
-            {% for aux in listacarrrito %}
-            <tr>
-              <td>
-                <a href=""> <img src="{{ aux.imagen_car.url }} " style="max-width: 100px;" alt="" class="img-fluid"></a>
-              </td>
-              <td>
-                <h5 class="mb-1">{{ aux.nombre_car }}</h5>
-              </td>
-              <td>
-                <p>${{ aux.precio_car }}</p>
-              </td>
-              <td>
-                <p>${{ aux.preciooferta_car }}</p>
-              </td>
-              <td>
-                  <p class="total-price front-weight-bold m-0">{{ aux.descripcion_car }}</p>
-              </td>
-              <td>
-                {{ aux.cantidad }}
-              </td>
-              {% if perms.app.view_carrito_producto %}
-              <td>
-                <a onclick="epc({{ aux.car_codigo }})" class="btn btn-danger"><i class="fa-solid fa-minus"></i> <i class="fa-solid fa-1"></i></a>
-              </td>
-              {% endif %}
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-        
-      </div>
-      <div class="col-sm-4"></div>
-    </div>
-  </div>
-
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-sm-12 d-flex justify-content-end">
-        <div class="col-sm-6">
-          
-        </div>
-        <div class="col-sm-6 d-flex justify-content-end" ><table class="table table-bordered">
-          <tbody>
-            
-            <tr>
-              <!--hacer un if para mostrar el permiso de si esta suscrtito para mostrar el total con descuento o el total normalito--> 
-              
-              {% if Total == contador %}
-              <td  class="tgrand">Total:</td>
-              <td  class="tgrand">${{ contador }}</td>
-              {% else %}
-              <td  class="tgrand">Total (Artimember) :</td>
-              <td  class="tgrand">${{ Total }}</td>
-              {% endif %}
-            </tr>
-          </tbody>
-        </table>
-        <a type="submit" name="pagar" id="pagar" href="{% url 'pagar' %}" class="btnm carroboton">PAGAR</a>
-      </div>
-    </div>
-    <div style="height: 220px;"></div>
-
-
-    {% else %}
-    <div style="height: fit-content;">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="row">
-              <div class="col-sm-12 text-center mt-2 mb-4">
-
-                <H2>No hay ningún producto en el carrito</H2>
-                <p style="font-size: large;">Puedes echarle un vistaso a nuestros productos destacados.</p>
-                <div class="carrosp">
-                  {% for aux in Carrovacio %}
-                  {% if aux.tipo.tipo == 'destacado' %}
-                  <div class="col-sm-3">
-                      <div class="card cartacss2">
-                          <div class="card-body">
-                            <h4 class= "card-title">{{aux.nombre}}</h4>
-                              {% if aux.imagen %} <!--Cambio de aqui hasta...-->
-                              <img src="{{ aux.imagen.url }}" class="imgcartas2">
-                              {% else %}
-                              <img src="{% static 'app/img/productos/Screenshot_20.png' %}" alt="" class="imgcartas2">
-                              {% endif %}
-                            <!--Aca...-->
-                            <p></p>
+      <div class="col-lg-12 carrobg d-flex">
+          <div class="row">
+              {% if listacarrrito %}
+                  <div class="col-sm-8">
+                      {% for aux in listacarrrito %}
+                          <div class="container-fluid productocar d-flex">
+                              <div class="row">
+                                  <div class="col-sm-6">
+                                      <a href=""> <img src="{{ aux.imagen_car.url }} "  alt="" class="img-fluid"></a>
+                                      <h5 class="mb-1">{{ aux.nombre_car }}</h5>
+                                  </div>
+                                  <div class="col-sm-6 der">
+                                      <p>Precio: ${{ aux.precio_car }}</p>
+                                      <p>Precio de Artimember: ${{ aux.preciooferta_car }}</p>
+                                      <p>Cantidad: {{ aux.cantidad }}</p>
+                                      <a onclick="epc({{ aux.car_codigo }})" class="btn btn-danger"><i class="fa-solid fa-minus"></i> <i class="fa-solid fa-1"></i></a>
+                                  </div>
+                              </div>
                           </div>
-                          <a href="#" class="card-link">{{aux.descripcion}}</a>
+                      {% endfor %}
+                  </div>
+                  <div class="col-sm-4">
+                      <div class="seccionpago">
+                          {% if Total == contador %}
+                              <div class="total">
+                                  <p> Total: ${{ contador }} </p>
+                                  <a type="submit" name="pagar" id="pagar" href="{% url 'pagar' %}" class="carroboton"> PAGAR </a>
+                              </div>
+                          {% else %}
+                              <div class="totalartimember">
+                                  <p> Total (Artimember) : ${{ Total }} </p>
+                                  <a type="submit" name="pagar" id="pagar" href="{% url 'pagar' %}" class="carrobotonartimember"> PAGAR <i class="fa-solid fa-crown"></i></a>
+                              </div>
+                          {% endif %}
                       </div>
                   </div>
-                  {% endif %}
-                  {% endfor %}
-                </div>
-
-              </div>
-            </div>
+                  <div class="axdxd"></div>
+              {% else %}
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-sm-12 text-center mt-2 mb-4">
+                      <H2 style="color: rgb(255, 255, 255);">No hay ningún producto en el carrito</H2>
+                      <p style="font-size: large; color: rgb(255, 255, 255);">Puedes echarle un vistaso a nuestros productos destacados.</p>
+                        <div class="container-fluid carrosp">
+                          {% for aux in Carrovacio %}
+                              {% if aux.tipo.tipo == 'destacado' %}
+                                <div class="col-sm-3">
+                                  <div class="card cartacss2 ">
+                                      <div class="card-body">
+                                          <h4 class= "card-title">{{aux.nombre}}</h4>
+                                          {% if aux.imagen %} <!--Cambio de aqui hasta...-->
+                                          <img src="{{ aux.imagen.url }}" class="imgcartas2">
+                                          {% else %}
+                                          <img src="{% static 'app/img/productos/Screenshot_20.png' %}" alt="" class="imgcartas2">
+                                          {% endif %}
+                                          <!--Aca...-->
+                                          <p></p>
+                                      </div>
+                                      <a href="#" class="card-link">{{aux.descripcion}}</a>
+                                  </div>
+                                </div>
+                              {% endif %}
+                          {% endfor %}
+                        </div>
+                    </div>
+                  </div>
+                </div>  
+              {% endif %}
           </div>
-        </div>
       </div>
-    </div>
+  </div>
+</div>
 
-    {% endif %}
-
-    {% endblock %}
+{% endblock %}
