@@ -331,14 +331,15 @@ def pagar(request):
 
 @login_required
 def historial(request):
-    historial = Historial.objects.all()
-    contador = Historial.objects.count()
+    
+    usuarioq = request.user.username
+    historial = Pedido.objects.filter(cliente=usuarioq)
+    
 
     datos = {
         'listaHistorial' : historial,
-        'contador' : contador
     }
-    redirect  (to ='historial')
+
     return render(request, 'app/historial.html', datos)
 
 
@@ -475,6 +476,7 @@ def listaapi(request):
 
     return render(request,'app/listas/listaapi.html',datos)
 
+@login_required
 def tests(request):
     productosAll = Producto.objects.all()
     propietario = request.user.username

@@ -12,10 +12,15 @@ class ProductoAdmin(admin.ModelAdmin):
     list_per_page = 5 # son los productos que se muestran por pagina
 
 
-
 class UsuarioAdmin(admin.ModelAdmin):
     list_display = ['usuario','nombre','apellido','correo','direccion'] #mostrar el producto ordenado por sus caracteristicas
     search_fields =['usuario'] #Un buscador que segun el parametro va ser por lo que busquemos
+    list_per_page = 5 # son los productos que se muestran por pagina
+
+
+class PedidoAdmin(admin.ModelAdmin):
+    list_display = ['codigo','productos','cantidad','total','fecha','estado','cliente'] #mostrar el producto ordenado por sus caracteristicas
+    search_fields =['codigo'] #Un buscador que segun el parametro va ser por lo que busquemos
     list_per_page = 5 # son los productos que se muestran por pagina
 
 
@@ -25,3 +30,4 @@ admin.site.register(TipoProducto) #esto sirve para que se visualice en el modo a
 admin.site.register(Producto,ProductoAdmin)
 admin.site.register(Carrito_Producto)
 admin.site.register(Usuario,UsuarioAdmin)
+admin.site.register(Pedido,PedidoAdmin)
