@@ -79,13 +79,20 @@ class Suscriptor(models.Model):
     class Meta:
         db_table = 'db_suscriptor'
 
+estados = [
+    ('En Preparación', 'En Preparación'),
+    ('Entregando a Currier', 'Entregando a Currier'),
+    ('En Camino', 'En Camino'),
+    ('Entregado', 'Entregado'),
+]
+
 class Pedido(models.Model):
     codigo = models.AutoField(primary_key=True)
     productos = models.CharField(max_length=250)
     cantidad = models.IntegerField()
     total = models.IntegerField()
     fecha = models.DateField()
-    estado = models.CharField(max_length=20)
+    estado = models.CharField(null=False,blank=False, choices=estados, max_length=25)
     cliente = models.CharField(max_length=20)
 
     def __str__(self):
@@ -94,14 +101,7 @@ class Pedido(models.Model):
     class Meta:
         db_table = 'db_pedido'
 
-class Estado_Pedido(models.Model):
-    estado = models.CharField(max_length=20)
 
-    def __str__(self):
-        return str(self.estado)
-    
-    class Meta:
-        db_table = 'db_estado_pedido'
 
 #pyton manage.py makemigrations -crea el script de la bd
 #python manage.py migration -crea las tablas de la bd

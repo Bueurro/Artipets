@@ -15,6 +15,7 @@ urlpatterns = [
     path('identificacionesnl',identificacionesnl, name="identificacionesnl"),
     path('carrito',carrito, name="carrito"),
     path('historial/',historial, name="historial"),
+    path('historial_general/',historial_general, name="historial_general"),
     path('suscripcion',suscripcion, name="suscripcion"),
     path('agregar_producto',agregar_producto, name="agregar_producto"),
     path('modificar_producto/<plu_codigo>/',modificar_producto, name="modificar_producto"),
@@ -29,5 +30,6 @@ urlpatterns = [
     path('eliminar_carrito/<car_codigo>/',eliminar_carrito, name="eliminar_carrito"),
     path("api_digimon/", api_digimon, name='api_digimon'),
     path('listaapi/',listaapi, name="listaapi"),
-    path('tests/',tests, name="tests"),
+    path('seguimiento/<codigo>/',seguimiento, name="seguimiento"),
+    path('modificar_estado/<codigo>/',modificar_estado, name="modificar_estado"),
 ]

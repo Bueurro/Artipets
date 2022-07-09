@@ -28,3 +28,9 @@ class UsuarioForm(ModelForm):
     class Meta:
         model = Usuario
         fields = '__all__'
+
+class PedidoForm(ModelForm):
+
+    class Meta:
+        model = Pedido
+        fields = ['codigo','estado']

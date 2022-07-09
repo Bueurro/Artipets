@@ -3,7 +3,8 @@
 {% load crispy_forms_tags %}
 {% block contenido%}
 
-<div class="container-fluid">
+
+<div class="container-fluid" style="min-height: 71vh;">
     <div class="row">
         <div class="col-sm-2"></div>
         <div class="col-sm-8">
@@ -11,12 +12,16 @@
                <form action="" method="post" enctype="multipart/form-data" class="mt-3 mb-3"> <!--Formulario agregar producto-->
                    {% csrf_token %}
                    <table>
-                       {{ form|crispy }}
+                       {{ form | crispy }}
                    </table>
                    <input type="submit" class="btn btn-success mt-2 mb-2"" value="Modificar">
-                   <a href="{% url 'listar_productos' %}" class="btn btn-secondary">Volver</a>
-               </form>
-	            {% if messages %} <!--Mensaje nuevo-->
+                    {% if perms.app.change_estado_pedido %}
+                        <a href="{% url 'historial_general' %}" class="btn btn-secondary">Volver</a>
+                    {% else %}    
+                        <a href="{% url 'historial' %}" class="btn btn-secondary">Volver</a>
+                    {% endif %}
+               </form>	
+               {% if messages %}
                     {% for msj in messages %}
                         <script>
                             Swal.fire({
@@ -29,7 +34,7 @@
                         </script>
                     {% endfor %}
                 {% endif %}
-               
+
             </div>                
         </div>
         <div class="col-sm-2"></div>
@@ -37,7 +42,4 @@
 </div>
 
 
-<div class="suscripciondonacion">
-    <a href=""><img src="{% static 'app/img/Artimember.jpg' %}" alt=""></a>
-</div>
-{% endblock%}
+{% endblock %}

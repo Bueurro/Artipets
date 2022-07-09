@@ -8,7 +8,10 @@
         <img src="{% static 'app/img/crown.png' %}" class="imgsub" alt="">
         <p class="subtitulosub">Donaciones</p>
         <p class="descripcionsub">Paga ahora y recibe un 5% en de descuento en tus productos destacados</p>
-        <a href="" class="boton">Paga ahora</a>
+        <form action ="" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="Paga ahora"  style="cursor: pointer;" class="btnm">
+        </form>
     </div>
     <div class="tabla">
         <p class="titulosub">Vista suscripcion</p>
@@ -22,7 +25,10 @@
         <img src="{% static 'app/img/crown.png' %}" class="imgsub" alt="">
         <p class="subtitulosub">Eliminar suscripcion</p>
         <p class="descripcionsub">Se puede renovar en cualquier momento</p>
-        <a href="" class="boton">Eliminar suscripcion</a>
+        <form action ="" method="GET">
+            {% csrf_token %}
+            <input type="submit" value="Eliminar suscripcion"  style="cursor: pointer;" class="btnm">
+        </form>
     </div>
 </div>
 {% endblock %}

@@ -31,3 +31,4 @@ admin.site.register(Producto,ProductoAdmin)
 admin.site.register(Carrito_Producto)
 admin.site.register(Usuario,UsuarioAdmin)
 admin.site.register(Pedido,PedidoAdmin)
+

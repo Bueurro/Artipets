@@ -20,12 +20,14 @@
                 <div class="container-fluid bdhist d-flex">
                     <div class="card-body">
                         <h4 class="card-title"> codigo: {{ aux.codigo }}</h4>
-                        <h5 class="card-title"> productos: {{ aux.productos }}</h5>
+                        <h4 class="card-title"> productos: {{ aux.productos }}</h4>
                         <p class="card-text"> cantidad: {{ aux.cantidad }}</p>
                         <p class="card-text"> fecha: {{ aux.fecha }}</p>
                         <p class="card-text"> estado: {{ aux.estado }}</p>
                         <p class="card-text"> Precio: ${{ aux.total }}</p>
+                        <p class="card-text"> Pedido del cliente: {{ aux.cliente }}</p>
                         <a href="{% url 'seguimiento' aux.codigo %}" class="btn btn-info">Ver Seguimiento</a>
+                        <a href="{% url 'modificar_estado' aux.codigo %}" class="btn btn-info">modificar Estado</button></a>
                     </div>
                 </div>
             {% endfor %}

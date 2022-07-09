@@ -305,7 +305,7 @@ def pagar(request):
 
     productosl = " "
     for producto in CarritoAll:
-        productosl = "" + productosl + producto.nombre_car + " [" + str(producto.cantidad) + "] | "
+        productosl = "" + productosl + producto.nombre_car + " [ " + str(producto.cantidad) + " ] | "
 
     fecha = date.today()
     cantidad_productos = len(CarritoAll)
@@ -316,12 +316,13 @@ def pagar(request):
 
     cliente = request.user.username 
 
+
     pedido = Pedido()
     pedido.productos = productosl
     pedido.cantidad = cantidad_productos
     pedido.total = total
     pedido.fecha = fecha
-    pedido.estado = "En Preparación"
+    pedido.estado = 'En Preparación'
     pedido.cliente = cliente
     pedido.save()
     CarritoAll.delete()
@@ -342,12 +343,88 @@ def historial(request):
 
     return render(request, 'app/historial.html', datos)
 
+@permission_required('app.change_estado_pedido') #listo
+def historial_general(request):
+
+    historial = Pedido.objects.all()
+
+    datos = {
+        'listaHistorial' : historial,
+    }
+
+    return render(request, 'app/historial_general.html', datos)
+
+
 
 @login_required 
 def suscripcion(request):
+
+    if request.POST:
+        uservalid = request.user.username
+        susex = Suscriptor.objects.filter(nombre_usuario=uservalid)
+        data = Suscriptor(nombre_usuario=uservalid)
+        validsus = data.suscrito
+
+        if susex:
+            if validsus == 1:
+                messages.success(request, "Usted ya está suscrito")
+            else:
+                susnueva = Suscriptor()
+                susnueva.nombre_usuario = uservalid
+                susnueva.suscrito = True
+                susnueva.save()
+                messages.success(request, "Suscripción exitosa.")
+        else:
+            susnueva = Suscriptor()
+            susnueva.nombre_usuario = uservalid
+            susnueva.suscrito = True
+            susnueva.save()
+            messages.success(request, "Suscripción exitosa.")
+            
+
+    if request.GET:
+        uservalid = request.user.username
+        susex = Suscriptor.objects.filter(nombre_usuario=uservalid)
+        data = Suscriptor(nombre_usuario=uservalid)
+        validsus = data.suscrito
+
+        if susex:
+            if validsus == 0:
+                messages.success(request, "Usted no está suscrito.")
+            else:
+                susnueva = Suscriptor()
+                susnueva.nombre_usuario = uservalid
+                susnueva.suscrito = False
+                susnueva.save()
+            messages.success(request, "Usted ya no está suscrito")
+        else:
+            susnueva = Suscriptor()
+            susnueva.nombre_usuario = uservalid
+            susnueva.suscrito = False
+            susnueva.save()
+
+
     return render(request,'app/suscripcion.html')
 
 #plushtmls
+
+def modificar_estado(request, codigo):
+    codigoq = codigo
+    pedido = Pedido.objects.get(codigo=codigoq)
+
+    datos = {
+        'form' : PedidoForm(instance=pedido)
+    }
+
+    if request.method == 'POST':
+        formulario = PedidoForm(data=request.POST, instance=pedido)
+        if formulario.is_valid():
+            formulario.save()
+            messages.success(request, 'Estado modificado correctamente.')
+            datos['form'] = formulario
+
+    return render(request, 'app/modificar_estado.html', datos)
+
 
 @permission_required('app.add_producto') #LISTO
 def agregar_producto(request):
@@ -477,30 +554,14 @@ def listaapi(request):
     return render(request,'app/listas/listaapi.html',datos)
 
 @login_required
-def tests(request):
-    productosAll = Producto.objects.all()
-    propietario = request.user.username
-    carritoAll = Carrito_Producto.objects.filter(usuario_car = propietario)
-    contador = 0
+def seguimiento(request, codigo):
 
-
-    for producto in carritoAll:
-        producto.totales = producto.precio_car * producto.cantidad
-        producto.save()
-        contador = contador + producto.totales
-
-    usuarioq = request.user
-    userx = Usuario.objects.get(usuario = usuarioq)
-
-    if userx.suscripcion == True:
-        total = round(contador - ( contador * 0.05))
-    else:
-        total = round(contador)
+    ordenq = codigo
+    historial = Pedido.objects.filter(codigo=ordenq)
+    
 
     datos = {
-        'listacarrrito' : carritoAll,
-        'contador' : contador,
-        'Total': total,
-        'Carrovacio' : productosAll,
+        'listaHistorial' : historial,
     }
-    return render(request, 'app/tests.html',datos)
+
+    return render(request, 'app/seguimiento.html',datos)
