@@ -54,7 +54,7 @@ function confirmarpagar(plu_codigo){
     })
 }
 
-function popupusuario(id_usuario){
+function popupusuario(id){
   Swal.fire({
       title: 'seguro que desea borrar?',
       text: "no podra deshacer la accion",

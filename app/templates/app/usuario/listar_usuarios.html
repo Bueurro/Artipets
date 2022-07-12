@@ -14,24 +14,22 @@
                             <th>NOMBRE</th>
                             <th>APELLIDO</th>
                             <th>CORREO</th>
-                            <th>DIRECCIÓN</th>
-                            <th>CONTRASEÑA</th>
+                            <th>FECHA</th>
                             <th>OPCIONES</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for aux in listaUsuarios %}
                         <tr>
-                            <td>{{ aux.id_usuario }}</td>
-                            <td>{{ aux.usuario }}</td>
-                            <td>{{ aux.nombre }}</td>
-                            <td>{{ aux.apellido }}</td>
-                            <td>{{ aux.correo }}</td>
-                            <td>{{ aux.direccion }}</td>
-                            <td>{{ aux.contrasena }}</td>
+                            <td>{{ aux.id }}</td>
+                            <td>{{ aux.username  }}</td>
+                            <td>{{ aux.first_name }}</td>
+                            <td>{{ aux.last_name }}</td>
+                            <td>{{ aux.email  }}</td>
+                            <td>{{ aux.date_joined  }}</td>
                             <td>
-                                <a href="{% url 'modificar_usuario' aux.id_usuario %}" class="btn btn-info">Modificar</a>
-                                <a onclick="popupusuario({{ aux.id_usuario }})" class="btn btn-danger">Eliminar</a>
+                                <a href="{% url 'modificar_usuario' aux.id %}" class="btn btn-info">Modificar</a>
+                                <a onclick="popupusuario({{ aux.id }})" class="btn btn-danger">Eliminar</a>
                             </td>
                         </tr>
                         {% endfor %}
@@ -44,9 +42,4 @@
         </div>
     </div>
 </section>
-
-
-
-
-
 {% endblock%}

@@ -14,7 +14,7 @@
                         <form action="" method="POST" >
                             {% csrf_token %}
                             {{ form | crispy }}
-                        <button type="submit" class="btn btn-success">Registrarse</button>
+                        <button type="submit"  class="btn btn-success" >Registrarse</button>
                         <p><a href="{% url 'password_reset' %}">Olvidaste Tu Contraseña?</a></p>
                         </form>
                         {% if messages %}

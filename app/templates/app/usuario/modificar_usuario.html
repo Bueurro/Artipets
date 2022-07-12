@@ -11,7 +11,7 @@
                <form action="" method="post" enctype="multipart/form-data" class="mt-3 mb-3"> <!--Formulario agregar producto-->
                    {% csrf_token %}
                    <table>
-                       {{ formu|crispy }}
+                       {{ form|crispy }}
                    </table>
                    <input type="submit" class="btn btn-success mt-2 mb-2"" value="Modificar">
                    <a href="{% url 'listar_usuarios' %}" class="btn btn-secondary">Volver</a>

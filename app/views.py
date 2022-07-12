@@ -9,6 +9,8 @@ from django.contrib.auth import authenticate, login
 import requests
 from itertools import count
 from datetime import date
+from django.contrib.auth.models import Group
+from django.contrib.auth.models import User
 #---------------------
 
 
@@ -87,6 +89,7 @@ def bandanasnl(request):
     }
     return render(request,'app/bandanasnl.html',datos)
 @login_required 
+
 def comidas(request):
     
     productosAll = Producto.objects.all()
@@ -487,36 +490,33 @@ def agregar_usuario(request):
             
     return render(request,'app/usuario/agregar_usuario.html',datosu)
 
-@permission_required('app.change_usuario') #LISTO
-def modificar_usuario(request, id_usuario):
-    usuario = Usuario.objects.get(id_usuario=id_usuario)
-    datosu = {
-        'formu' : UsuarioForm(instance=usuario)
+@permission_required('app.change_usuario') 
+def modificar_usuario(request, id):
+    usuario =  User.objects.get(id=id)
+    datos = {
+        'form' : RegistroUsuarioForm(instance=usuario)
     }
     if request.method == 'POST':
-        formulario = UsuarioForm(data=request.POST, files=request.FILES, instance=usuario)
+        formulario = RegistroUsuarioForm(request.POST, files=request.FILES, instance=usuario)
         if formulario.is_valid():
             formulario.save()
             messages.success(request,'Usuario modificado correctamente!')
-            datosu['formu'] = formulario
+            datos['form'] = formulario
+    return render(request,'app/usuario/modificar_usuario.html', datos) 
 
-    return render(request, 'app/usuario/modificar_usuario.html', datosu)
 
-@permission_required('app.view_usuario') #LISTO
+@permission_required('app.view_usuario')
 def listar_usuarios(request):
-    datosu = {'formu' : UsuarioForm()}
-    UsuarioAll = Usuario.objects.all()
+    usuarios = User.objects.all()
     datosu = {
-        'listaUsuarios' : UsuarioAll
+        'listaUsuarios' : usuarios
     }
-            
     return render(request,'app/usuario/listar_usuarios.html',datosu)
 
-@permission_required('app.delete_usuario') #LISTO
-def eliminar_usuario(request, id_usuario):
-    usuario = Usuario.objects.get(id_usuario=id_usuario)
+@permission_required('app.delete_usuario')
+def eliminar_usuario(request, id):
+    usuario = User.objects.get(id=id)
     usuario.delete()
-
     return redirect(to="listar_usuarios")
 
 def registro_usuario(request):
@@ -531,6 +531,9 @@ def registro_usuario(request):
             #login(request,user)
             messages.success(request,'Registrado correctamente!')
             #return redirect(to="home")
+            user  = formulario.save()
+            group = Group.objects.get(name='cliente')
+            group.user_set.add(user)
         datos["form"] = formulario
 
     return render(request, 'registration/registro_usuario.html', datos)
@@ -565,3 +568,6 @@ def seguimiento(request, codigo):
     }
 
     return render(request, 'app/seguimiento.html',datos)
+
+
+#final

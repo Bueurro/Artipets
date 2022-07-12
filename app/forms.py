@@ -34,3 +34,4 @@ class PedidoForm(ModelForm):
     class Meta:
         model = Pedido
         fields = ['codigo','estado']
+

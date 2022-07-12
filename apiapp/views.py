@@ -15,3 +15,10 @@ class TipoProductoViewSet(viewsets.ModelViewSet):
     queryset = TipoProducto.objects.all()
     serializer_class = TipoProductoSerializer
 
+class UsuarioViewSet(viewsets.ModelViewSet):
+    queryset = Usuario.objects.all()
+    serializer_class = UsuarioSerializer
+
+class SuscriptorViewSet(viewsets.ModelViewSet):
+    queryset = Suscriptor.objects.all()
+    serializer_class = SuscriptorSerializer
